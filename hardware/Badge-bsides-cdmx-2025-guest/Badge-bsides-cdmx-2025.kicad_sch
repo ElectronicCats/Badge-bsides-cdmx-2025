@@ -6954,16 +6954,16 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 246.38 93.98 0)
+		(at 246.38 96.52 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0f139b92-3328-4747-9b6c-adf2e55d37e7")
 		(property "Reference" "J4"
-			(at 247.015 86.36 0)
+			(at 247.015 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6971,15 +6971,15 @@
 			)
 		)
 		(property "Value" "Conn_01x04_Pin"
-			(at 247.015 88.9 0)
+			(at 247.015 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
-			(at 246.38 93.98 0)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal"
+			(at 246.38 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6988,7 +6988,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 246.38 93.98 0)
+			(at 246.38 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6997,7 +6997,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 246.38 93.98 0)
+			(at 246.38 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9846,16 +9846,16 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 220.98 93.98 0)
+		(at 220.98 96.52 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "75bd6aa5-fa6c-40f1-858b-7d78c3235958")
 		(property "Reference" "J6"
-			(at 221.615 86.36 0)
+			(at 221.615 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9863,15 +9863,15 @@
 			)
 		)
 		(property "Value" "Conn_01x04_Pin"
-			(at 221.615 88.9 0)
+			(at 221.615 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
-			(at 220.98 93.98 0)
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Horizontal"
+			(at 220.98 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9880,7 +9880,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 220.98 93.98 0)
+			(at 220.98 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9889,7 +9889,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 220.98 93.98 0)
+			(at 220.98 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)

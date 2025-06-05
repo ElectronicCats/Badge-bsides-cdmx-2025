@@ -10,8 +10,7 @@
 		(rev "1.0")
 	)
 	(lib_symbols
-		(symbol "+3V3_5"
-			(power)
+		(symbol "Battery_Cell_1"
 			(pin_numbers
 				(hide yes)
 			)
@@ -22,25 +21,26 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
+			(property "Reference" "BT4"
+				(at 2.54 2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
+					(justify left)
 				)
 			)
-			(property "Value" "+3V3"
-				(at 0 3.556 0)
+			(property "Value" "Battery_Cell"
+				(at -12.446 4.064 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 0)
+			(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
+				(at 0 1.524 90)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -49,6 +49,14 @@
 				)
 			)
 			(property "Datasheet" ""
+				(at 0 1.524 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -57,7 +65,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(property "LCSC#" "C5290189 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -66,7 +74,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "global power"
+			(property "manf#" "BH-AAA-A1AJ001 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -75,10 +83,82 @@
 					(hide yes)
 				)
 			)
-			(symbol "+3V3_5_0_1"
+			(property "provedor" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Height" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer_Name" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Part Number" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Price/Stock" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "battery cell"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Battery_Cell_1_0_1"
+				(rectangle
+					(start -2.286 1.778)
+					(end 2.286 1.524)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.5748 1.1938)
+					(end 1.4732 0.6858)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
+						(xy 0 1.778) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -90,7 +170,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0.762) (xy 0 0)
 					)
 					(stroke
 						(width 0)
@@ -102,10 +182,22 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0.508 3.429) (xy 1.524 3.429)
 					)
 					(stroke
-						(width 0)
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 3.937) (xy 1.016 2.921)
+					)
+					(stroke
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -113,11 +205,11 @@
 					)
 				)
 			)
-			(symbol "+3V3_5_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
+			(symbol "Battery_Cell_1_1_1"
+				(pin passive line
+					(at 0 5.08 270)
+					(length 2.54)
+					(name "+"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -125,6 +217,24 @@
 						)
 					)
 					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3838,131 +3948,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+3V3"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+3V3"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+3V3\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+3V3_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+3V3_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:+BATT"
 			(power)
 			(pin_names
@@ -4398,7 +4383,7 @@
 		(uuid "25868fe6-b834-4630-af70-5d7cf19acef3")
 	)
 	(junction
-		(at 142.875 127)
+		(at 142.24 125.857)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2e3db800-8d8a-420c-8e62-73685e25d294")
@@ -4512,7 +4497,7 @@
 		(uuid "a6a49783-4bc5-4271-b5de-a3ee7da57f93")
 	)
 	(junction
-		(at 143.0024 127)
+		(at 142.3674 125.857)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b396f88e-ced4-4448-8395-9faed38c6549")
@@ -4530,7 +4515,7 @@
 		(uuid "cf25bef2-77c8-4c52-a120-f968f789a323")
 	)
 	(junction
-		(at 128.524 131.572)
+		(at 127.889 130.429)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "df1a7888-e777-45a5-8f93-5fe691a23fea")
@@ -4552,6 +4537,14 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f8dc0224-3a7c-4952-8e04-7afcbf1c7812")
+	)
+	(no_connect
+		(at 222.25 41.91)
+		(uuid "1e9e71ff-3801-4b96-9c97-0a92a09a4403")
+	)
+	(no_connect
+		(at 222.25 44.45)
+		(uuid "a51152e0-4ac4-4803-b189-26a1ac113fd4")
 	)
 	(no_connect
 		(at 222.25 52.07)
@@ -4594,16 +4587,6 @@
 			(type default)
 		)
 		(uuid "0225cb2e-4070-4d29-879f-e9d85a92a9f5")
-	)
-	(wire
-		(pts
-			(xy 214.63 44.45) (xy 222.25 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0288abff-f544-4817-9b22-500fa6475aa0")
 	)
 	(wire
 		(pts
@@ -4677,7 +4660,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.684 131.572) (xy 143.0024 131.572)
+			(xy 138.049 130.429) (xy 142.3674 130.429)
 		)
 		(stroke
 			(width 0)
@@ -4777,16 +4760,6 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 41.91) (xy 222.25 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c67cf91-7bb9-4247-aca2-98037c9b7ec9")
-	)
-	(wire
-		(pts
 			(xy 214.63 49.53) (xy 222.25 49.53)
 		)
 		(stroke
@@ -4817,7 +4790,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 127) (xy 128.524 127)
+			(xy 130.175 125.857) (xy 127.889 125.857)
 		)
 		(stroke
 			(width 0)
@@ -5057,7 +5030,7 @@
 	)
 	(wire
 		(pts
-			(xy 169.037 43.18) (xy 171.831 43.18)
+			(xy 169.037 43.18) (xy 175.26 43.18)
 		)
 		(stroke
 			(width 0)
@@ -5107,7 +5080,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 119.253) (xy 142.875 120.777)
+			(xy 142.24 118.11) (xy 142.24 119.634)
 		)
 		(stroke
 			(width 0)
@@ -5307,16 +5280,6 @@
 	)
 	(wire
 		(pts
-			(xy 171.831 43.18) (xy 171.831 41.783)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6f8e8469-5871-4620-a89e-dbf1a4152c27")
-	)
-	(wire
-		(pts
 			(xy 222.25 33.02) (xy 219.71 33.02)
 		)
 		(stroke
@@ -5337,7 +5300,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.524 127) (xy 128.524 131.572)
+			(xy 127.889 125.857) (xy 127.889 130.429)
 		)
 		(stroke
 			(width 0)
@@ -5487,7 +5450,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.524 131.572) (xy 128.524 132.842)
+			(xy 127.889 130.429) (xy 127.889 131.699)
 		)
 		(stroke
 			(width 0)
@@ -5507,7 +5470,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 125.857) (xy 142.875 127)
+			(xy 142.24 124.714) (xy 142.24 125.857)
 		)
 		(stroke
 			(width 0)
@@ -5564,6 +5527,16 @@
 			(type default)
 		)
 		(uuid "8b001186-67c9-4176-8049-80a08467d717")
+	)
+	(wire
+		(pts
+			(xy 175.26 43.18) (xy 175.26 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b03574d-f35b-4b02-8642-b9e113b262e2")
 	)
 	(polyline
 		(pts
@@ -5637,7 +5610,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.524 131.572) (xy 133.604 131.572)
+			(xy 127.889 130.429) (xy 132.969 130.429)
 		)
 		(stroke
 			(width 0)
@@ -5777,7 +5750,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.0024 127) (xy 147.32 127)
+			(xy 142.3674 125.857) (xy 146.685 125.857)
 		)
 		(stroke
 			(width 0)
@@ -5847,7 +5820,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.0024 131.572) (xy 143.0024 127)
+			(xy 142.3674 130.429) (xy 142.3674 125.857)
 		)
 		(stroke
 			(width 0)
@@ -5957,7 +5930,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 127) (xy 143.0024 127)
+			(xy 142.24 125.857) (xy 142.3674 125.857)
 		)
 		(stroke
 			(width 0)
@@ -6087,7 +6060,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 127) (xy 142.875 127)
+			(xy 140.335 125.857) (xy 142.24 125.857)
 		)
 		(stroke
 			(width 0)
@@ -6366,12 +6339,12 @@
 		(uuid "3a4541b8-a781-4c09-b15b-f69e258f69af")
 	)
 	(label "GPIO1"
-		(at 214.63 41.91 0)
+		(at 257.81 34.29 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "3ce90aa1-9a8a-4b00-9e4a-36d0d77a1a8f")
 	)
@@ -6396,12 +6369,12 @@
 		(uuid "56007084-ebb3-46db-9601-ca160ada6344")
 	)
 	(label "GPIO2"
-		(at 214.63 44.45 0)
+		(at 257.81 36.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "62ff1c11-6b68-4138-b8a0-0dd13403407e")
 	)
@@ -6586,7 +6559,7 @@
 		(uuid "b49aa405-523c-4fcc-923a-d918b3ce88a4")
 	)
 	(label "NTST"
-		(at 147.32 127 0)
+		(at 146.685 125.857 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6654,6 +6627,72 @@
 			(justify left bottom)
 		)
 		(uuid "feb9a8a0-11b9-4d1e-b53b-0cd513c31f89")
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 97.79 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "03354bc1-62c7-41c2-a16f-23f31e82609f")
+		(property "Reference" "#PWR021"
+			(at 97.79 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 97.79 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5fd94cc3-1c0a-48d1-bab6-f9aef1f04eef")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Symbols:PY32F030F2xU")
@@ -7084,6 +7123,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 142.24 118.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1ddff232-2aa1-47ac-86aa-899fcd0a91ca")
+		(property "Reference" "#PWR024"
+			(at 142.24 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 142.24 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 142.24 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 142.24 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "66ab9a69-4f0a-464e-9eef-aeeb6bbc3d47")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR024")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 50.8 99.06 90)
 		(unit 1)
@@ -7469,6 +7574,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 146.05 95.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2891aea1-526c-42a4-b849-149159c3ddb8")
+		(property "Reference" "#PWR017"
+			(at 146.05 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 146.05 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 146.05 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 146.05 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 146.05 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6f5aadf5-edf2-4f80-abe3-27a2dd91d065")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VBUS")
 		(at 115.697 33.782 0)
 		(unit 1)
@@ -7528,72 +7699,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR029")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 72.39 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2eda871a-01bf-494f-a0e4-7cb47d144ba9")
-		(property "Reference" "#PWR082"
-			(at 72.39 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 72.39 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 72.39 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 72.39 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 72.39 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "75601b93-4664-4c15-bda2-7fdbe78b7a74")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR082")
 					(unit 1)
 				)
 			)
@@ -7792,72 +7897,6 @@
 			(project ""
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 97.79 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "32be79b3-f889-44e0-a8f7-3991dfeed10e")
-		(property "Reference" "#PWR083"
-			(at 97.79 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 97.79 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "47b79bfb-74b8-42fe-bdf2-c07c634b1fd3")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR083")
 					(unit 1)
 				)
 			)
@@ -8116,71 +8155,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 171.831 41.783 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3aef3570-7271-4d0d-911b-5383c33238a6")
-		(property "Reference" "#PWR049"
-			(at 171.831 45.593 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 172.212 37.3888 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2ba92739-09db-48d5-8b7e-b2150098e29a")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -8635,72 +8609,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 124.46 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "54851bde-837d-4cbf-a425-6b5cb1436275")
-		(property "Reference" "#PWR084"
-			(at 124.46 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 124.46 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ce8b0179-64ce-4bcd-b659-d009b720721a")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR084")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
 		(at 203.2 24.13 0)
 		(unit 1)
@@ -8826,6 +8734,72 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 72.39 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5ecc9815-56e1-4524-aa45-5be903a83d5f")
+		(property "Reference" "#PWR023"
+			(at 72.39 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 72.39 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d35d0314-235f-4367-8ccb-8779fb10c39b")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -9438,6 +9412,133 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 40.64 109.22 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "68568b30-e2b6-4f49-98cd-0f9cef4b4c73")
+		(property "Reference" "D10"
+			(at 40.64 114.046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R_LED"
+			(at 40.64 112.014 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Footprints:LYT77K-K2M1"
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://dammedia.osram.info/media/resource/hires/osram-dam-2492860/LY%20T776.pdf"
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "manf#" "XZCWD45S-9"
+			(at 233.045 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Proveedor" "Digikey"
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer_Name" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 40.64 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "74a86a96-b0fe-4cb7-a3b4-e5306f41e109")
+		)
+		(pin "2"
+			(uuid "6435e2fd-0019-4d51-8250-11d067b13fb4")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "D10")
 					(unit 1)
 				)
 			)
@@ -10228,7 +10329,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 142.875 123.317 180)
+		(at 142.24 122.174 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10236,7 +10337,7 @@
 		(dnp no)
 		(uuid "7d8d4d50-6543-4056-8644-9c876915b28b")
 		(property "Reference" "R4"
-			(at 147.701 123.317 0)
+			(at 147.066 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10245,7 +10346,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 147.701 121.539 0)
+			(at 147.066 120.396 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10254,7 +10355,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10263,7 +10364,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/1811081617_YAGEO-RC0603JR-0710KL_C99198.pdf"
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10272,7 +10373,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10281,7 +10382,7 @@
 			)
 		)
 		(property "LCSC#" "C99198"
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10290,7 +10391,7 @@
 			)
 		)
 		(property "DNP" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10299,7 +10400,7 @@
 			)
 		)
 		(property "provedor" "JLCPCB"
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10308,7 +10409,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10316,7 +10417,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10324,7 +10425,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10332,7 +10433,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 142.875 123.317 0)
+			(at 142.24 122.174 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10917,18 +11018,17 @@
 		)
 	)
 	(symbol
-		(lib_name "+3V3_5")
-		(lib_id "power:+3V3")
-		(at 146.05 95.25 0)
+		(lib_id "power:+3.3V")
+		(at 149.86 149.86 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "921c7966-d649-40f6-bc1e-c7ce238cfee7")
-		(property "Reference" "#PWR09"
-			(at 146.05 99.06 0)
+		(uuid "9a16a8bc-eade-4733-8dbd-b2741cf4cd35")
+		(property "Reference" "#PWR018"
+			(at 149.86 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10936,8 +11036,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3V3"
-			(at 146.05 90.17 0)
+		(property "Value" "+3.3V"
+			(at 149.86 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10945,7 +11045,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 146.05 95.25 0)
+			(at 149.86 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10954,7 +11054,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 146.05 95.25 0)
+			(at 149.86 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10962,8 +11062,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 146.05 95.25 0)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 149.86 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10972,12 +11072,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "b74c27cc-d81d-4a27-8e21-e61ca7b6b3cd")
+			(uuid "b9d40598-194d-4861-b5d8-8a6a6035df0b")
 		)
 		(instances
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR09")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -10985,7 +11085,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 136.144 131.572 270)
+		(at 135.509 130.429 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10993,7 +11093,7 @@
 		(dnp no)
 		(uuid "9bf07219-87f6-4623-8ce9-60215556a338")
 		(property "Reference" "C6"
-			(at 134.0358 134.8486 90)
+			(at 133.4008 133.7056 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11002,7 +11102,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 134.0358 137.16 90)
+			(at 133.4008 136.017 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11011,7 +11111,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11020,7 +11120,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11029,7 +11129,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11038,7 +11138,7 @@
 			)
 		)
 		(property "LCSC#" "C66501"
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11047,7 +11147,7 @@
 			)
 		)
 		(property "DNP" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11056,7 +11156,7 @@
 			)
 		)
 		(property "provedor" "JLCPCB"
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11065,7 +11165,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11073,7 +11173,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11081,7 +11181,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11089,7 +11189,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 136.144 131.572 0)
+			(at 135.509 130.429 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11439,7 +11539,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 195.58 24.13 0)
+		(at 175.26 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11448,7 +11548,7 @@
 		(fields_autoplaced yes)
 		(uuid "a816a089-06e2-404c-a8eb-83521ca5c579")
 		(property "Reference" "#PWR04"
-			(at 195.58 27.94 0)
+			(at 175.26 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11457,7 +11557,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 195.58 19.05 0)
+			(at 175.26 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11465,7 +11565,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 195.58 24.13 0)
+			(at 175.26 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11474,7 +11574,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 24.13 0)
+			(at 175.26 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11483,7 +11583,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 195.58 24.13 0)
+			(at 175.26 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11772,71 +11872,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 142.875 119.253 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b4807e8c-ca99-4944-b5da-d044e290b200")
-		(property "Reference" "#PWR022"
-			(at 142.875 123.063 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 143.256 114.8588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c8319025-b8f7-4168-8230-220a9c8f1c24")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR022")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 72.39 67.31 0)
 		(unit 1)
@@ -12087,6 +12122,72 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "R41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 195.58 24.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba96c174-f737-4960-a272-e3ca20e780c0")
+		(property "Reference" "#PWR011"
+			(at 195.58 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 195.58 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 195.58 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 195.58 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d5840a4e-8b01-4aa0-981b-07a630cdb5bf")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -12459,72 +12560,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 149.86 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ce7c53e7-ed25-4515-a929-6de361084534")
-		(property "Reference" "#PWR085"
-			(at 149.86 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 149.86 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 149.86 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 149.86 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 149.86 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "26a0ae62-8fd8-4a55-bfc1-663cb36e55e8")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR085")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 195.58 36.83 0)
 		(unit 1)
@@ -12789,6 +12824,134 @@
 		)
 	)
 	(symbol
+		(lib_name "Battery_Cell_1")
+		(lib_id "Device:Battery_Cell")
+		(at 30.48 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d923afff-6eef-468c-8f54-5ab38ddb2cd6")
+		(property "Reference" "BT4"
+			(at 33.02 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Battery_Cell"
+			(at 18.034 167.386 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
+			(at 30.48 169.926 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 169.926 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C5290189 "
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "manf#" "BH-AAA-A1AJ001 "
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer_Name" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 30.48 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "b1fa0e69-1d10-43ca-bcaa-f8b87ccf57af")
+		)
+		(pin "1"
+			(uuid "fa98e58d-a6bf-4718-8e99-ccd77b7b103e")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "BT4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HunterCat-NFC-rescue:USB_C_Plug_USB2.0-Connector")
 		(at 44.45 48.26 0)
 		(unit 1)
@@ -13013,16 +13176,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 128.524 132.842 0)
+		(lib_id "power:+3.3V")
+		(at 124.46 149.86 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e4694bb0-4fb8-46bb-b373-3dfd02b2109d")
-		(property "Reference" "#PWR020"
-			(at 128.524 139.192 0)
+		(fields_autoplaced yes)
+		(uuid "e385bd03-222b-4c85-a146-c524acb59eea")
+		(property "Reference" "#PWR019"
+			(at 124.46 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13030,8 +13194,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 128.651 137.2362 0)
+		(property "Value" "+3.3V"
+			(at 124.46 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13039,7 +13203,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 128.524 132.842 0)
+			(at 124.46 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13048,7 +13212,72 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.524 132.842 0)
+			(at 124.46 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 124.46 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78275aa3-f58f-4598-b1b0-80d0b95ff358")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 127.889 131.699 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e4694bb0-4fb8-46bb-b373-3dfd02b2109d")
+		(property "Reference" "#PWR020"
+			(at 127.889 138.049 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.016 136.0932 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 127.889 131.699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127.889 131.699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13057,7 +13286,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 128.524 132.842 0)
+			(at 127.889 131.699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13520,133 +13749,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR054")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:Battery_Cell")
-		(at 30.48 171.45 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "eb4e6714-a1e8-460b-8520-4423ddfc5f16")
-		(property "Reference" "BT4"
-			(at 33.02 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Battery_Cell"
-			(at 18.034 167.386 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
-			(at 30.48 169.926 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 30.48 169.926 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC#" "C5290189 "
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "manf#" "BH-AAA-A1AJ001 "
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "provedor" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Height" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Manufacturer_Name" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Part Number" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Price/Stock" ""
-			(at 30.48 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "32a2d837-449f-48cf-8730-39b38f58a947")
-		)
-		(pin "1"
-			(uuid "2ff9a51d-bd1e-4eb0-9510-cda721b0da97")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "BT4")
 					(unit 1)
 				)
 			)
@@ -14204,7 +14306,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 135.89 127 0)
+		(at 135.255 125.857 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14212,7 +14314,7 @@
 		(dnp no)
 		(uuid "f303d405-116e-49b7-b174-3444498aa4a2")
 		(property "Reference" "SW2"
-			(at 135.89 119.761 0)
+			(at 135.255 118.618 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14220,7 +14322,7 @@
 			)
 		)
 		(property "Value" "RESET"
-			(at 135.89 122.0724 0)
+			(at 135.255 120.9294 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14228,7 +14330,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3342"
-			(at 135.89 121.92 0)
+			(at 135.255 120.777 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14237,7 +14339,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 121.92 0)
+			(at 135.255 120.777 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14246,7 +14348,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14255,7 +14357,7 @@
 			)
 		)
 		(property "LCSC#" "C318884"
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14264,7 +14366,7 @@
 			)
 		)
 		(property "DNP" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14273,7 +14375,7 @@
 			)
 		)
 		(property "provedor" "JLCPCB"
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14282,7 +14384,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14290,7 +14392,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14298,7 +14400,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14306,7 +14408,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 135.89 127 0)
+			(at 135.255 125.857 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14456,133 +14558,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR010")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 40.64 109.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f75f0114-e97d-45cc-ba06-5c4117c44d25")
-		(property "Reference" "D10"
-			(at 40.64 114.046 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "R_LED"
-			(at 40.64 112.014 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Footprints:LYT77K-K2M1"
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://dammedia.osram.info/media/resource/hires/osram-dam-2492860/LY%20T776.pdf"
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "manf#" "XZCWD45S-9"
-			(at 233.045 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "Digikey"
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "provedor" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Height" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Manufacturer_Name" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Part Number" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Price/Stock" ""
-			(at 40.64 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1dfd2759-79d8-4516-b3bd-25fdcb3fbc3a")
-		)
-		(pin "2"
-			(uuid "00489f39-8b5d-4da5-b3da-b26fc9e2de11")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "D10")
 					(unit 1)
 				)
 			)
