@@ -10,8 +10,7 @@
 		(rev "1.0")
 	)
 	(lib_symbols
-		(symbol "+3V3_5"
-			(power)
+		(symbol "Battery_Cell_1"
 			(pin_numbers
 				(hide yes)
 			)
@@ -22,25 +21,26 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
+			(property "Reference" "BT3"
+				(at 2.54 2.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
+					(justify left)
 				)
 			)
-			(property "Value" "+3V3"
-				(at 0 3.556 0)
+			(property "Value" "Battery_Cell"
+				(at -12.446 4.064 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 0)
+			(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
+				(at 0 1.524 90)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -49,6 +49,14 @@
 				)
 			)
 			(property "Datasheet" ""
+				(at 0 1.524 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -57,7 +65,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(property "LCSC#" "C5290189 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -66,7 +74,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "global power"
+			(property "manf#" "BH-AAA-A1AJ001 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -75,10 +83,82 @@
 					(hide yes)
 				)
 			)
-			(symbol "+3V3_5_0_1"
+			(property "provedor" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Height" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer_Name" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Part Number" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Price/Stock" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "battery cell"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Battery_Cell_1_0_1"
+				(rectangle
+					(start -2.286 1.778)
+					(end 2.286 1.524)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.5748 1.1938)
+					(end 1.4732 0.6858)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
+						(xy 0 1.778) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -90,7 +170,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0.762) (xy 0 0)
 					)
 					(stroke
 						(width 0)
@@ -102,10 +182,22 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0.508 3.429) (xy 1.524 3.429)
 					)
 					(stroke
-						(width 0)
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 3.937) (xy 1.016 2.921)
+					)
+					(stroke
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -113,11 +205,11 @@
 					)
 				)
 			)
-			(symbol "+3V3_5_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
+			(symbol "Battery_Cell_1_1_1"
+				(pin passive line
+					(at 0 5.08 270)
+					(length 2.54)
+					(name "+"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -125,6 +217,24 @@
 						)
 					)
 					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -898,7 +1008,7 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "BT1"
+			(property "Reference" "BT4"
 				(at 2.54 2.54 0)
 				(effects
 					(font
@@ -916,7 +1026,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Batteries:BAT-HLD-001"
+			(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
 				(at 0 1.524 90)
 				(effects
 					(font
@@ -933,7 +1043,7 @@
 					)
 				)
 			)
-			(property "Description" "Single-cell battery"
+			(property "Description" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -942,7 +1052,7 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC#" ""
+			(property "LCSC#" "C5290189 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -951,13 +1061,54 @@
 					(hide yes)
 				)
 			)
-			(property "manf#" "BAT-HLD-001"
+			(property "manf#" "BH-AAA-A1AJ001 "
 				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 					(hide yes)
+				)
+			)
+			(property "provedor" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Height" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer_Name" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Part Number" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Price/Stock" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 				)
 			)
 			(property "ki_keywords" "battery cell"
@@ -1052,7 +1203,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1070,7 +1221,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3838,131 +3989,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+3V3"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+3V3"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+3V3\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+3V3_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+3V3_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:+BATT"
 			(power)
 			(pin_names
@@ -4398,12 +4424,6 @@
 		(uuid "25868fe6-b834-4630-af70-5d7cf19acef3")
 	)
 	(junction
-		(at 142.875 127)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2e3db800-8d8a-420c-8e62-73685e25d294")
-	)
-	(junction
 		(at 124.46 180.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4450,6 +4470,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "52302cef-cf8b-416d-bf6a-c5a55a0b17bf")
+	)
+	(junction
+		(at 143.51 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5ac31950-8d52-451d-aaae-91e1c68dfc33")
 	)
 	(junction
 		(at 228.6 99.06)
@@ -4506,12 +4532,6 @@
 		(uuid "93284e40-184f-47a7-86ac-74fb05e15d0b")
 	)
 	(junction
-		(at 169.037 43.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9a53b81a-5246-49f8-a84a-138d8a8c35cf")
-	)
-	(junction
 		(at 62.23 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4540,6 +4560,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "df1a7888-e777-45a5-8f93-5fe691a23fea")
+	)
+	(junction
+		(at 169.037 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f63a30ac-bfa9-4869-bc3f-74ddb47e1ff7")
 	)
 	(junction
 		(at 227.33 92.71)
@@ -4754,6 +4780,16 @@
 			(type default)
 		)
 		(uuid "163acbb8-96ee-497a-8e7d-bf8f41d0b7f4")
+	)
+	(wire
+		(pts
+			(xy 143.51 127) (xy 147.32 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18152e1c-e8f9-42af-a120-2efc5e981141")
 	)
 	(wire
 		(pts
@@ -5047,16 +5083,6 @@
 	)
 	(wire
 		(pts
-			(xy 169.037 43.18) (xy 171.831 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b40bd55-34ff-45c2-af49-ca6458407328")
-	)
-	(wire
-		(pts
 			(xy 203.2 24.13) (xy 203.2 26.67)
 		)
 		(stroke
@@ -5094,16 +5120,6 @@
 			(type default)
 		)
 		(uuid "4df74ca1-ce83-41c5-9c98-6a57fec9bf73")
-	)
-	(wire
-		(pts
-			(xy 142.875 119.253) (xy 142.875 120.777)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4df84208-138f-45f9-820e-a1d37e8affc3")
 	)
 	(wire
 		(pts
@@ -5297,16 +5313,6 @@
 	)
 	(wire
 		(pts
-			(xy 171.831 43.18) (xy 171.831 41.783)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6f8e8469-5871-4620-a89e-dbf1a4152c27")
-	)
-	(wire
-		(pts
 			(xy 222.25 33.02) (xy 219.71 33.02)
 		)
 		(stroke
@@ -5497,7 +5503,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.875 125.857) (xy 142.875 127)
+			(xy 143.51 125.73) (xy 143.51 127)
 		)
 		(stroke
 			(width 0)
@@ -5787,7 +5793,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.0024 127) (xy 147.32 127)
+			(xy 143.0024 127) (xy 143.51 127)
 		)
 		(stroke
 			(width 0)
@@ -5877,6 +5883,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 38.1) (xy 171.45 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc345d1d-a444-4dd8-8be0-d9cac50fe659")
+	)
+	(wire
+		(pts
 			(xy 217.17 62.23) (xy 217.17 58.42)
 		)
 		(stroke
@@ -5954,16 +5970,6 @@
 			(type default)
 		)
 		(uuid "c3f07176-54eb-4129-bc3e-55f6901e0fde")
-	)
-	(wire
-		(pts
-			(xy 142.875 127) (xy 143.0024 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c4a29ff6-1610-42d8-ac76-2023dfb5bf2a")
 	)
 	(wire
 		(pts
@@ -6087,7 +6093,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 127) (xy 142.875 127)
+			(xy 140.97 127) (xy 143.0024 127)
 		)
 		(stroke
 			(width 0)
@@ -6154,6 +6160,16 @@
 			(type default)
 		)
 		(uuid "e8216546-f814-4f4e-8316-5a2729a4332a")
+	)
+	(wire
+		(pts
+			(xy 169.037 43.18) (xy 171.45 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e83df8ae-9505-4907-9e1c-15f9747a999e")
 	)
 	(wire
 		(pts
@@ -6274,6 +6290,16 @@
 			(type default)
 		)
 		(uuid "f59857e2-e8f3-43f5-9402-0318ebc33e13")
+	)
+	(wire
+		(pts
+			(xy 143.51 118.11) (xy 143.51 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f859affd-b00b-4cb6-a073-271345c321f0")
 	)
 	(wire
 		(pts
@@ -6666,6 +6692,72 @@
 		(uuid "feb9a8a0-11b9-4d1e-b53b-0cd513c31f89")
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 97.79 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "09ccbcca-ec73-4e85-808b-bcd50f523a5a")
+		(property "Reference" "#PWR019"
+			(at 97.79 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 97.79 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 97.79 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "46db2a98-20ee-466b-aaa8-c3dd19048c83")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Symbols:PY32F030F2xU")
 		(at 237.49 45.72 0)
 		(unit 1)
@@ -7005,6 +7097,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C492412"
+			(at 246.38 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "33624821-1ad2-4710-89b5-86c7f9486170")
 		)
@@ -7229,6 +7330,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 149.86 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "24b03402-a50d-4a39-8fd9-e6f7d0e11203")
+		(property "Reference" "#PWR022"
+			(at 149.86 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 149.86 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 149.86 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6d61816c-d5cb-41e4-aca9-0b5ec56ce866")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 195.58 30.48 0)
 		(unit 1)
@@ -7291,7 +7458,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C85713"
+		(property "LCSC#" "C96446"
 			(at 195.58 30.48 0)
 			(effects
 				(font
@@ -7544,17 +7711,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 72.39 149.86 0)
+		(lib_id "power:+3.3V")
+		(at 146.05 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2eda871a-01bf-494f-a0e4-7cb47d144ba9")
-		(property "Reference" "#PWR082"
-			(at 72.39 153.67 0)
+		(uuid "2eefe609-a549-4849-a065-586027094d30")
+		(property "Reference" "#PWR017"
+			(at 146.05 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7562,8 +7729,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3V3"
-			(at 72.39 144.78 0)
+		(property "Value" "+3.3V"
+			(at 146.05 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7571,7 +7738,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 72.39 149.86 0)
+			(at 146.05 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7580,7 +7747,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 149.86 0)
+			(at 146.05 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7588,8 +7755,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 72.39 149.86 0)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 146.05 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7598,12 +7765,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "75601b93-4664-4c15-bda2-7fdbe78b7a74")
+			(uuid "0eecbe70-25c8-4219-9acb-56573bf061c5")
 		)
 		(instances
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR082")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -7808,72 +7975,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 97.79 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "32be79b3-f889-44e0-a8f7-3991dfeed10e")
-		(property "Reference" "#PWR083"
-			(at 97.79 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 97.79 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 97.79 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "47b79bfb-74b8-42fe-bdf2-c07c634b1fd3")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR083")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 144.653 47.752 0)
 		(unit 1)
@@ -7936,7 +8037,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C85713"
+		(property "LCSC#" "C96446"
 			(at 144.653 47.752 0)
 			(effects
 				(font
@@ -8132,71 +8233,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 171.831 41.783 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3aef3570-7271-4d0d-911b-5383c33238a6")
-		(property "Reference" "#PWR049"
-			(at 171.831 45.593 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 172.212 37.3888 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 171.831 41.783 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2ba92739-09db-48d5-8b7e-b2150098e29a")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR049")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VBUS")
 		(at 77.47 29.21 0)
 		(unit 1)
@@ -8268,7 +8304,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "40c84cba-ec9b-4d6b-a0a7-51d142e0c99d")
 		(property "Reference" "J5"
 			(at 229.235 134.493 0)
@@ -8378,6 +8414,72 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 72.39 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "455add5a-f00d-498d-a3b1-07bd7f978062")
+		(property "Reference" "#PWR018"
+			(at 72.39 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 72.39 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 72.39 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f8130b03-6d5a-456d-9a8c-4d6a0b6ec55c")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -8564,7 +8666,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 143.51 172.72 0)
 			(effects
 				(font
@@ -8629,6 +8731,15 @@
 				)
 			)
 		)
+		(property "LCSC#" "C455280"
+			(at 143.51 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6ed6095d-6bfd-49af-8942-8b7dec46780a")
 		)
@@ -8639,72 +8750,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "SW10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 124.46 149.86 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "54851bde-837d-4cbf-a425-6b5cb1436275")
-		(property "Reference" "#PWR084"
-			(at 124.46 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 124.46 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 124.46 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ce8b0179-64ce-4bcd-b659-d009b720721a")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR084")
 					(unit 1)
 				)
 			)
@@ -8904,7 +8949,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C85713"
+		(property "LCSC#" "C96446"
 			(at 169.037 45.72 0)
 			(effects
 				(font
@@ -9489,7 +9534,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 97.79 172.72 0)
 			(effects
 				(font
@@ -9507,7 +9552,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 97.79 172.72 0)
 			(effects
 				(font
@@ -9570,6 +9615,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "LCSC#" "C96446"
+			(at 97.79 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -9897,6 +9951,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C2897386"
+			(at 220.98 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "ea69172d-226d-4ce8-b803-f70bba73299a")
 		)
@@ -9919,6 +9982,7 @@
 		)
 	)
 	(symbol
+		(lib_name "Battery_Cell_1")
 		(lib_id "Device:Battery_Cell")
 		(at 30.48 162.56 0)
 		(unit 1)
@@ -10238,7 +10302,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 142.875 123.317 180)
+		(at 143.51 123.19 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10246,7 +10310,7 @@
 		(dnp no)
 		(uuid "7d8d4d50-6543-4056-8644-9c876915b28b")
 		(property "Reference" "R4"
-			(at 147.701 123.317 0)
+			(at 148.336 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10255,7 +10319,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 147.701 121.539 0)
+			(at 148.336 121.412 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10264,7 +10328,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10273,7 +10337,7 @@
 			)
 		)
 		(property "Datasheet" "https://datasheet.lcsc.com/lcsc/1811081617_YAGEO-RC0603JR-0710KL_C99198.pdf"
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10282,7 +10346,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10291,7 +10355,7 @@
 			)
 		)
 		(property "LCSC#" "C99198"
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10300,7 +10364,7 @@
 			)
 		)
 		(property "DNP" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10309,7 +10373,7 @@
 			)
 		)
 		(property "provedor" "JLCPCB"
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10318,7 +10382,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10326,7 +10390,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10334,7 +10398,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10342,7 +10406,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 142.875 123.317 0)
+			(at 143.51 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10546,6 +10610,72 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "Q3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 171.45 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "830fbf80-0672-489c-bc59-ed4e30d9035e")
+		(property "Reference" "#PWR011"
+			(at 171.45 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 171.45 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 171.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 171.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 171.45 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a2e2974e-bd21-4776-8e85-2db4a325f3a6")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -10927,73 +11057,6 @@
 		)
 	)
 	(symbol
-		(lib_name "+3V3_5")
-		(lib_id "power:+3V3")
-		(at 146.05 95.25 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "921c7966-d649-40f6-bc1e-c7ce238cfee7")
-		(property "Reference" "#PWR09"
-			(at 146.05 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 146.05 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 146.05 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 146.05 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 146.05 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b74c27cc-d81d-4a27-8e21-e61ca7b6b3cd")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 136.144 131.572 270)
 		(unit 1)
@@ -11047,7 +11110,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C66501"
+		(property "LCSC#" "C14663"
 			(at 136.144 131.572 0)
 			(effects
 				(font
@@ -11349,7 +11412,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 72.39 172.72 0)
 			(effects
 				(font
@@ -11367,7 +11430,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 72.39 172.72 0)
 			(effects
 				(font
@@ -11432,6 +11495,15 @@
 				)
 			)
 		)
+		(property "LCSC#" "C96446"
+			(at 72.39 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1bddf35e-e9ca-4717-b275-eec75ab7a24d")
 		)
@@ -11442,6 +11514,72 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "C67")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 143.51 118.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a7e04014-acc2-4359-9b0b-2244d6bf09ee")
+		(property "Reference" "#PWR09"
+			(at 143.51 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 143.51 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 143.51 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cd642dbd-7d1c-42e6-b17a-14c82324158d")
+		)
+		(instances
+			(project "Badge-bsides-cdmx-2025"
+				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -11549,7 +11687,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 149.86 172.72 0)
 			(effects
 				(font
@@ -11567,7 +11705,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 149.86 172.72 0)
 			(effects
 				(font
@@ -11630,6 +11768,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "LCSC#" "C96446"
+			(at 149.86 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -11776,71 +11923,6 @@
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
 					(reference "#PWR016")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 142.875 119.253 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b4807e8c-ca99-4944-b5da-d044e290b200")
-		(property "Reference" "#PWR022"
-			(at 142.875 123.063 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 143.256 114.8588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 142.875 119.253 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c8319025-b8f7-4168-8230-220a9c8f1c24")
-		)
-		(instances
-			(project "Badge-bsides-cdmx-2025"
-				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -12221,7 +12303,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 66.04 172.72 0)
 			(effects
 				(font
@@ -12286,6 +12368,15 @@
 				)
 			)
 		)
+		(property "LCSC#" "C455280"
+			(at 66.04 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "f61e93d0-b481-4c9c-b219-4f2c9b283eb4")
 		)
@@ -12337,7 +12428,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 203.2 30.48 0)
 			(effects
 				(font
@@ -12469,17 +12560,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 149.86 149.86 0)
+		(lib_id "power:+3.3V")
+		(at 124.46 149.86 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "ce7c53e7-ed25-4515-a929-6de361084534")
-		(property "Reference" "#PWR085"
-			(at 149.86 153.67 0)
+		(uuid "cfca5f59-d6f9-4fb2-a3f8-3bff3538ad66")
+		(property "Reference" "#PWR021"
+			(at 124.46 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12487,8 +12578,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3V3"
-			(at 149.86 144.78 0)
+		(property "Value" "+3.3V"
+			(at 124.46 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12496,7 +12587,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 149.86 149.86 0)
+			(at 124.46 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12505,7 +12596,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 149.86 149.86 0)
+			(at 124.46 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12513,8 +12604,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 149.86 149.86 0)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 124.46 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12523,12 +12614,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "26a0ae62-8fd8-4a55-bfc1-663cb36e55e8")
+			(uuid "ecacd744-31a7-4910-be63-0263b2af22c8")
 		)
 		(instances
 			(project "Badge-bsides-cdmx-2025"
 				(path "/9e507f21-309f-4609-82f1-623ff0aae3c9"
-					(reference "#PWR085")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -12653,7 +12744,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 118.11 172.72 0)
 			(effects
 				(font
@@ -12716,6 +12807,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "LCSC#" "C455280"
+			(at 118.11 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -13253,7 +13353,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 124.46 172.72 0)
 			(effects
 				(font
@@ -13271,7 +13371,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 124.46 172.72 0)
 			(effects
 				(font
@@ -13334,6 +13434,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "LCSC#" "C96446"
+			(at 124.46 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -14082,7 +14191,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 77.47 41.91 0)
 			(effects
 				(font
@@ -14917,7 +15026,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 91.44 172.72 0)
 			(effects
 				(font
@@ -14980,6 +15089,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "LCSC#" "C455280"
+			(at 91.44 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
