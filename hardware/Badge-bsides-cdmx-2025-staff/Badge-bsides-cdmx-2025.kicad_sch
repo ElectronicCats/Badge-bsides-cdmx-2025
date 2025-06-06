@@ -5648,7 +5648,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "-"
+		(property "LCSC#" "C221660"
 			(at 137.16 34.29 0)
 			(effects
 				(font
@@ -5666,7 +5666,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "JS102011SAQN"
+		(property "Manufacturer_Part_Number" ""
 			(at 139.7 37.846 0)
 			(effects
 				(font
@@ -5774,6 +5774,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC#" "C492412"
+			(at 246.38 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "4"
@@ -6257,7 +6265,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C85713"
+		(property "LCSC#" "C96446"
 			(at 195.58 30.48 0)
 			(effects
 				(font
@@ -6965,7 +6973,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C66501"
 			(at 77.47 101.6 0)
 			(effects
 				(font
@@ -7292,7 +7300,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 143.51 172.72 0)
 			(effects
 				(font
@@ -7350,6 +7358,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 143.51 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C455280"
 			(at 143.51 172.72 0)
 			(effects
 				(font
@@ -7664,7 +7680,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 97.79 172.72 0)
 			(effects
 				(font
@@ -7722,6 +7738,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 97.79 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C96446"
 			(at 97.79 172.72 0)
 			(effects
 				(font
@@ -7816,7 +7840,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C66501"
 			(at 53.34 101.6 0)
 			(effects
 				(font
@@ -8024,6 +8048,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC#" "C2897386"
+			(at 220.98 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "4"
@@ -8682,7 +8714,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 72.39 172.72 0)
 			(effects
 				(font
@@ -8740,6 +8772,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 72.39 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C96446"
 			(at 72.39 172.72 0)
 			(effects
 				(font
@@ -8882,7 +8922,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 149.86 172.72 0)
 			(effects
 				(font
@@ -8940,6 +8980,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 149.86 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C96446"
 			(at 149.86 172.72 0)
 			(effects
 				(font
@@ -9347,7 +9395,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 66.04 172.72 0)
 			(effects
 				(font
@@ -9405,6 +9453,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 66.04 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C455280"
 			(at 66.04 172.72 0)
 			(effects
 				(font
@@ -9538,7 +9594,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C14663"
+		(property "LCSC#" "C66501"
 			(at 209.296 30.48 0)
 			(effects
 				(font
@@ -9713,7 +9769,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 118.11 172.72 0)
 			(effects
 				(font
@@ -9771,6 +9827,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 118.11 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C455280"
 			(at 118.11 172.72 0)
 			(effects
 				(font
@@ -10219,7 +10283,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C96446"
+		(property "#LCSC" ""
 			(at 124.46 172.72 0)
 			(effects
 				(font
@@ -10277,6 +10341,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 124.46 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C96446"
 			(at 124.46 172.72 0)
 			(effects
 				(font
@@ -11254,7 +11326,7 @@
 				(hide yes)
 			)
 		)
-		(property "#LCSC" "C455280"
+		(property "#LCSC" ""
 			(at 91.44 172.72 0)
 			(effects
 				(font
@@ -11312,6 +11384,14 @@
 			)
 		)
 		(property "TYPE" ""
+			(at 91.44 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC#" "C455280"
 			(at 91.44 172.72 0)
 			(effects
 				(font

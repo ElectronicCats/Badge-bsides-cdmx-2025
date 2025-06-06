@@ -6337,7 +6337,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "SK6812MINI-E"
 			(at 76.835 117.221 0)
 			(effects
 				(font
@@ -6374,7 +6374,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C527089"
+		(property "LCSC#" "C5149201"
 			(at 71.12 110.49 0)
 			(effects
 				(font
@@ -6392,7 +6392,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "WS2812B-Mini"
+		(property "manf#" ""
 			(at 71.12 110.49 0)
 			(effects
 				(font
@@ -6775,7 +6775,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C66501"
 			(at 76.2 99.06 0)
 			(effects
 				(font
@@ -7710,7 +7710,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C66501"
 			(at 52.07 99.06 0)
 			(effects
 				(font
@@ -8390,7 +8390,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C14663"
+		(property "LCSC#" "C66501"
 			(at 136.144 131.572 0)
 			(effects
 				(font
@@ -9402,7 +9402,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C14663"
+		(property "LCSC#" "C66501"
 			(at 209.296 30.48 0)
 			(effects
 				(font
@@ -9880,7 +9880,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "SK6812MINI-E"
 			(at 52.705 117.221 0)
 			(effects
 				(font
@@ -9917,7 +9917,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C527089"
+		(property "LCSC#" "C5149201"
 			(at 46.99 110.49 0)
 			(effects
 				(font
@@ -9935,7 +9935,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "WS2812B-Mini"
+		(property "manf#" ""
 			(at 46.99 110.49 0)
 			(effects
 				(font
