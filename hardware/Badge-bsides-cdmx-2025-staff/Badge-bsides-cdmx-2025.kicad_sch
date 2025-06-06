@@ -1008,7 +1008,7 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "BT1"
+			(property "Reference" "BT4"
 				(at 2.54 2.54 0)
 				(effects
 					(font
@@ -1026,7 +1026,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Batteries:BAT-HLD-001"
+			(property "Footprint" "Battery:BatteryHolder_Keystone_2466_1xAAA"
 				(at 0 1.524 90)
 				(effects
 					(font
@@ -1043,7 +1043,7 @@
 					)
 				)
 			)
-			(property "Description" "Single-cell battery"
+			(property "Description" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -1052,7 +1052,7 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC#" ""
+			(property "LCSC#" "C5290189 "
 				(at 0 0 0)
 				(effects
 					(font
@@ -1061,13 +1061,54 @@
 					(hide yes)
 				)
 			)
-			(property "manf#" "BAT-HLD-001"
+			(property "manf#" "BH-AAA-A1AJ001 "
 				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 					(hide yes)
+				)
+			)
+			(property "provedor" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Height" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer_Name" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Part Number" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Mouser Price/Stock" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
 				)
 			)
 			(property "ki_keywords" "battery cell"
@@ -1162,7 +1203,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1180,7 +1221,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4950,12 +4991,24 @@
 		(uuid "4bd5a285-f6d3-41b4-a560-0d60ebc25d35")
 	)
 	(no_connect
+		(at 222.25 54.61)
+		(uuid "91159290-5a18-41b4-9710-fc214f5111e2")
+	)
+	(no_connect
 		(at 222.25 52.07)
-		(uuid "bb4062b7-22dc-4d21-a4d1-d28851a782b7")
+		(uuid "b4690594-93ea-448b-a99d-cfaaf6ab1fcc")
+	)
+	(no_connect
+		(at 222.25 44.45)
+		(uuid "b560d08a-84d1-4d99-9047-ee55d4d457e4")
 	)
 	(no_connect
 		(at 59.69 50.8)
 		(uuid "da47a962-c3cf-4b19-bb4f-612aa731eb94")
+	)
+	(no_connect
+		(at 251.46 57.15)
+		(uuid "dd1ed8d7-6cd2-4a4e-8d65-867a45d34c18")
 	)
 	(no_connect
 		(at 59.69 45.72)
@@ -5000,16 +5053,6 @@
 			(type default)
 		)
 		(uuid "0219bcbc-6681-4c81-b93c-8451a8b9538f")
-	)
-	(wire
-		(pts
-			(xy 214.63 44.45) (xy 222.25 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0288abff-f544-4817-9b22-500fa6475aa0")
 	)
 	(wire
 		(pts
@@ -5563,16 +5606,6 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 57.15) (xy 256.54 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "55dc5cd5-dcd9-448c-915c-75a0bc567c72")
-	)
-	(wire
-		(pts
 			(xy 251.46 44.45) (xy 256.54 44.45)
 		)
 		(stroke
@@ -5580,16 +5613,6 @@
 			(type default)
 		)
 		(uuid "589869c3-ed7d-4b69-8177-c59c850fb523")
-	)
-	(wire
-		(pts
-			(xy 214.63 54.61) (xy 222.25 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "58ef5edf-01f7-4f88-8164-062ae4c68289")
 	)
 	(wire
 		(pts
@@ -5650,16 +5673,6 @@
 			(type default)
 		)
 		(uuid "620f5c04-2f22-4132-ae3d-9a6502d6cfdc")
-	)
-	(wire
-		(pts
-			(xy 251.46 36.83) (xy 257.81 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6303a8fc-b01e-4f49-a746-2a88d1582252")
 	)
 	(wire
 		(pts
@@ -6020,6 +6033,16 @@
 			(type default)
 		)
 		(uuid "8b001186-67c9-4176-8049-80a08467d717")
+	)
+	(wire
+		(pts
+			(xy 257.81 36.83) (xy 251.46 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bbd8630-6afd-40ac-ac9d-3c3508967b1f")
 	)
 	(wire
 		(pts
@@ -6892,12 +6915,12 @@
 		(uuid "56007084-ebb3-46db-9601-ca160ada6344")
 	)
 	(label "GPIO2"
-		(at 214.63 44.45 0)
+		(at 257.81 36.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "62ff1c11-6b68-4138-b8a0-0dd13403407e")
 	)
@@ -6922,12 +6945,12 @@
 		(uuid "782d7b67-0843-415f-8972-9b8d14cc4390")
 	)
 	(label "TX"
-		(at 229.87 92.71 180)
+		(at 255.27 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "7877ed4b-b213-4df0-a519-1451761b7dfd")
 	)
@@ -6940,16 +6963,6 @@
 			(justify left bottom)
 		)
 		(uuid "7a084ae9-d933-466f-9e82-6464e965a2c4")
-	)
-	(label "LED1"
-		(at 214.63 54.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "81e20709-4ad3-41d5-9b15-c5bea555ec11")
 	)
 	(label "NTST"
 		(at 256.54 44.45 180)
@@ -7020,16 +7033,6 @@
 			(justify right bottom)
 		)
 		(uuid "a98e4882-8276-4492-802c-621094a182ff")
-	)
-	(label "LED2"
-		(at 256.54 57.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "aa995f7e-0fcb-4f05-b29e-6b0fa80aac19")
 	)
 	(label "BTTN3"
 		(at 257.81 49.53 180)
@@ -7102,12 +7105,12 @@
 		(uuid "dba90d58-e6c7-4068-8de7-2fb513bc4ded")
 	)
 	(label "RX"
-		(at 255.27 92.71 180)
+		(at 229.87 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "decaa218-d794-4842-84ca-0eb97ff0a492")
 	)
