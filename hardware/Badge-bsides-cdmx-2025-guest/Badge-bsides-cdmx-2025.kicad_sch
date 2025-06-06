@@ -9094,7 +9094,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "SK6812MINI-E"
 			(at 45.085 119.761 0)
 			(effects
 				(font
@@ -9131,7 +9131,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C527089"
+		(property "LCSC#" "C5149201"
 			(at 39.37 113.03 0)
 			(effects
 				(font
@@ -14101,7 +14101,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "SK6812MINI-E"
 			(at 69.215 119.761 0)
 			(effects
 				(font
@@ -14138,7 +14138,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C527089"
+		(property "LCSC#" "C5149201"
 			(at 63.5 113.03 0)
 			(effects
 				(font
