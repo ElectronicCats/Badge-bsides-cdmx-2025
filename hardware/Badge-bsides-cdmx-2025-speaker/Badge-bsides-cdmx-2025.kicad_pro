@@ -507,7 +507,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "speaker",
+      "plot": "speaker/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
