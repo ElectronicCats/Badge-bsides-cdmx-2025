@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "METRO_ADD")(type "KiCad")(uri "${KIPRJMOD}/METRO_ADD.kicad_sym")(options "")(descr ""))
+)
