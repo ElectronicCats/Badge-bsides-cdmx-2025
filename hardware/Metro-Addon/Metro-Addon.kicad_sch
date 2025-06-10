@@ -3415,7 +3415,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+		(property "Datasheet" ""
 			(at 149.86 91.44 0)
 			(effects
 				(font
@@ -3764,7 +3764,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+		(property "Datasheet" ""
 			(at 153.67 46.99 0)
 			(effects
 				(font
@@ -4476,7 +4476,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_Small")
-		(at 151.13 26.67 90)
+		(at 190.5 25.4 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4485,23 +4485,25 @@
 		(fields_autoplaced yes)
 		(uuid "a9f37a6c-7486-4d06-9030-d65c3b16c9da")
 		(property "Reference" "D3"
-			(at 144.399 26.6065 0)
+			(at 193.294 24.0664 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "Blue"
-			(at 146.939 26.6065 0)
+			(at 193.294 26.6064 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 151.13 26.67 90)
+			(at 190.5 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4510,7 +4512,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 151.13 26.67 90)
+			(at 190.5 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4519,7 +4521,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 151.13 26.67 0)
+			(at 190.5 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4528,7 +4530,7 @@
 			)
 		)
 		(property "LCSC#" "C205441"
-			(at 151.13 26.67 0)
+			(at 190.5 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4537,7 +4539,7 @@
 			)
 		)
 		(property "manf#" ""
-			(at 151.13 26.67 0)
+			(at 190.5 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4954,7 +4956,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_Small")
-		(at 190.5 25.4 90)
+		(at 151.13 26.67 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4963,23 +4965,25 @@
 		(fields_autoplaced yes)
 		(uuid "d1807dd9-cd7b-46ef-9b87-0c276a47c860")
 		(property "Reference" "D2"
-			(at 184.404 25.3365 0)
+			(at 153.924 25.3364 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Value" "Red"
-			(at 186.944 25.3365 0)
+			(at 153.924 27.8764 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 190.5 25.4 90)
+			(at 151.13 26.67 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4988,7 +4992,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 190.5 25.4 90)
+			(at 151.13 26.67 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4997,7 +5001,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 190.5 25.4 0)
+			(at 151.13 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5006,7 +5010,7 @@
 			)
 		)
 		(property "LCSC#" "C965812"
-			(at 190.5 25.4 0)
+			(at 151.13 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5015,7 +5019,7 @@
 			)
 		)
 		(property "manf#" ""
-			(at 190.5 25.4 0)
+			(at 151.13 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
