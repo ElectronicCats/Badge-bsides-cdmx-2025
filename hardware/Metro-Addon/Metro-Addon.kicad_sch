@@ -3434,6 +3434,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C8545"
+			(at 144.78 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "355c372a-6156-4a8e-9e73-71266007cdb5")
 		)
@@ -3766,6 +3775,15 @@
 			)
 		)
 		(property "Description" "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"
+			(at 148.59 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C8545"
 			(at 148.59 43.18 0)
 			(effects
 				(font
@@ -4835,7 +4853,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C119075"
+		(property "LCSC#" "C96346"
 			(at 144.78 50.8 0)
 			(effects
 				(font
@@ -5312,7 +5330,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C119075"
+		(property "LCSC#" "C96346"
 			(at 140.97 95.25 0)
 			(effects
 				(font
