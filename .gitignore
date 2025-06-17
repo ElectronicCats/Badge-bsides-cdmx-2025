@@ -35,5 +35,5 @@ hardware/Badge-bsides-cdmx-2025-community/#auto_saved_files#
 *.zip
 
 .vscode/
-/Build*
-/Temp*
+/**/Build*
+/**/Temp*
