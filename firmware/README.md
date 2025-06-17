@@ -99,9 +99,9 @@ Download the toolchain from [Arm GNU Toolchain Downloads](https://developer.arm.
 
 ```bash
 sudo mkdir -p /opt/gcc-arm/
-sudo tar xvf arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt/gcc-arm/
+sudo tar xvf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt/gcc-arm/
 cd /opt/gcc-arm/
-sudo chown -R root:root arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/
+sudo chown -R root:root arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/
 ```
 
 ## 2. Clone This Repository
@@ -149,6 +149,22 @@ This will install PyOCD into:
 /home/[user]/.local/lib/python3.10/site-packages/pyocd/*
 ```
 In Ubuntu, .profile will take care of the PATH, run `source ~/.profile` to make pyocd command available
+
+## 4. Setup toolchain path
+
+Create a .env file in the firmware root directory, and set the path to the GNU ARM Embedded Toolchain, e.g.
+
+```bash
+echo "ARM_TOOLCHAIN=/opt/gcc-arm/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin" > .env
+```
+
+Export the path to your shell environment
+
+```bash
+source .env
+```
+
+> Remember you have to run `source .env` every time you open a new terminal, or add the line to your shell configuration file, e.g. `~/.bashrc` or `~/.zshrc`.
 
 ## 4. Edit Makefile
 
@@ -221,7 +237,7 @@ make flash
 Install Cortex Debug extension, add a new configuration in launch.json, e.g.
 ```
 {
-    "armToolchainPath": "/opt/gcc-arm/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin/",
+    "armToolchainPath": "/opt/gcc-arm/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/",
     "toolchainPrefix": "arm-none-eabi",
     "name": "Cortex Debug",
     "cwd": "${workspaceFolder}",
