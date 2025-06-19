@@ -3,6 +3,7 @@
 PROJECT			?= app
 # The path for generated files
 BUILD_DIR		= Build
+-include .env
 
 # MCU types: 
 #   PY32F002Ax5
@@ -10,12 +11,12 @@ BUILD_DIR		= Build
 #   PY32F003x4, PY32F003x6, PY32F003x8,
 #   PY32F030x6, PY32F030x8, 
 #   PY32F072xB
-MCU_TYPE		= PY32F003x4
+MCU_TYPE		= PY32F030x6
 
 ##### Options #####
 
 # Use LL library instead of HAL, y:yes, n:no
-USE_LL_LIB ?= n
+USE_LL_LIB ?= y
 # Enable printf float %f support, y:yes, n:no
 ENABLE_PRINTF_FLOAT	?= n
 # Build with FreeRTOS, y:yes, n:no
@@ -29,7 +30,7 @@ FLASH_PROGRM	?= pyocd
 
 ##### Toolchains #######
 
-ARM_TOOLCHAIN	?= /opt/gcc-arm/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin
+# ARM_TOOLCHAIN	?= Check readme to see how to se this
 
 # path to JLinkExe
 JLINKEXE		?= /opt/SEGGER/JLink/JLinkExe
