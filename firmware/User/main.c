@@ -10,6 +10,7 @@
 #include "py32f0xx_bsp_clock.h"
 #include "py32f0xx_bsp_printf.h"
 #include "ssd1306.h"
+#include "bitmaps.h"
 
 #define I2C_ADDRESS 0xA0 /* host/client address */
 #define I2C_STATE_READY 0
@@ -43,6 +44,12 @@ int main(void) {
   SSD1306_Puts("Font size: 11x18", &Font_6x10, 1);
   SSD1306_UpdateScreen();  // display
   LL_mDelay(1000);
+
+  // Show bsides_logo on the screen
+  // SSD1306_Fill(0);
+  SSD1306_Image(epd_bitmap_bsides_logo, 0, 0, 0);
+  SSD1306_UpdateScreen();
+  LL_mDelay(2000);
 
   SSD1306_Fill(0);
   SSD1306_GotoXY(5, 5);
