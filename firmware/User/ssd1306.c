@@ -435,6 +435,28 @@ void SSD1306_Image(uint8_t *img, uint8_t frame, uint8_t x, uint8_t y)
     }
 }
 
+void SSD1306_DrawBitmap(const unsigned char* bitmap, uint8_t x, uint8_t y, uint8_t width, uint8_t height)
+{
+    uint8_t byte_width = (width + 7) / 8; // Calculate bytes per row
+    uint8_t byte_val;
+    uint8_t bit_pos;
+    
+    for (uint8_t row = 0; row < height; row++) {
+        for (uint8_t col = 0; col < width; col++) {
+            // Calculate which byte and bit position
+            byte_val = bitmap[row * byte_width + col / 8];
+            bit_pos = 7 - (col % 8); // MSB first
+            
+            // Extract the bit and draw pixel
+            if (byte_val & (1 << bit_pos)) {
+                SSD1306_DrawPixel(x + col, y + row, SSD1306_COLOR_WHITE);
+            } else {
+                SSD1306_DrawPixel(x + col, y + row, SSD1306_COLOR_BLACK);
+            }
+        }
+    }
+}
+
 void SSD1306_ON(void)
 {
     SSD1306_WriteCommand(0x8D);
