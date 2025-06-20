@@ -91,7 +91,8 @@ uint8_t SSD1306_Init(void)
      * N=A[5:0]: from 16MUX to 64MUX, RESET=111111b (i.e. 63d, 64MUX)
      * A[5:0] from 0 to 14 are invalid entry.*/
     SSD1306_WriteCommand(0xA8);
-    SSD1306_WriteCommand(0x3F);
+    // SSD1306_WriteCommand(0x3F);
+    SSD1306_WriteCommand(0x1F);
     /** 
      * Set Display Offset, Set vertical shift by COM from 0d~63d
      * The value is reset to 00h after RESET */
@@ -104,7 +105,8 @@ uint8_t SSD1306_Init(void)
      * A[5]=0b(RESET), Disable COM Left/Right remap
      * A[5]=1b, Enable COM Left/Right remap */
     SSD1306_WriteCommand(0xDA);
-    SSD1306_WriteCommand(0x12); // A[4]=0, A[5]=1
+    // SSD1306_WriteCommand(0x12); // A[4]=0, A[5]=1
+    SSD1306_WriteCommand(0x02);
     /**
      * Set Display Divide Ratio/Oscillator Frequency
      * */
@@ -437,21 +439,35 @@ void SSD1306_Image(uint8_t *img, uint8_t frame, uint8_t x, uint8_t y)
 
 void SSD1306_DrawBitmap(const unsigned char* bitmap, uint8_t x, uint8_t y, uint8_t width, uint8_t height)
 {
-    uint8_t byte_width = (width + 7) / 8; // Calculate bytes per row
-    uint8_t byte_val;
-    uint8_t bit_pos;
+    uint8_t byte_width = (width + 7) / 8;
     
-    for (uint8_t row = 0; row < height; row++) {
-        for (uint8_t col = 0; col < width; col++) {
-            // Calculate which byte and bit position
-            byte_val = bitmap[row * byte_width + col / 8];
-            bit_pos = 7 - (col % 8); // MSB first
+    for (uint8_t j = 0; j < height; j++) {
+        for (uint8_t i = 0; i < width; i++) {
+            uint16_t const current_x = x + i;
+            uint16_t const current_y = y + j;
+
+            if (current_x >= SSD1306_WIDTH || current_y >= SSD1306_HEIGHT) {
+                continue;
+            }
             
-            // Extract the bit and draw pixel
-            if (byte_val & (1 << bit_pos)) {
-                SSD1306_DrawPixel(x + col, y + row, SSD1306_COLOR_WHITE);
+            uint8_t color;
+            if (bitmap[j * byte_width + i / 8] & (0x80 >> (i % 8))) {
+                color = SSD1306_COLOR_WHITE;
             } else {
-                SSD1306_DrawPixel(x + col, y + row, SSD1306_COLOR_BLACK);
+                color = SSD1306_COLOR_BLACK;
+            }
+
+            if (SSD1306.Inverted) {
+                color = !color;
+            }
+            
+            uint16_t buffer_index = current_x + (current_y / 8) * SSD1306_WIDTH;
+            uint8_t bit_mask = 1 << (current_y % 8);
+
+            if (color == SSD1306_COLOR_WHITE) {
+                SSD1306_Buffer_all[buffer_index] |= bit_mask;
+            } else {
+                SSD1306_Buffer_all[buffer_index] &= ~bit_mask;
             }
         }
     }

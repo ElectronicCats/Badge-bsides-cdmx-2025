@@ -34,8 +34,7 @@ int main(void) {
   uint8_t res = SSD1306_Init();
   printf("OLED init: %d\n", res);
 
-  // Show bsides_logo on the screen
-  // SSD1306_Fill(0);
+  SSD1306_UpdateScreen();
   SSD1306_DrawBitmap(epd_bitmap_bsides_logo, 0, 0, 128, 32);
   SSD1306_UpdateScreen();
   LL_mDelay(2000);
@@ -48,11 +47,11 @@ int main(void) {
   SSD1306_DrawLine(127, 0, 127, 63, 1);
   SSD1306_DrawLine(0, 63, 127, 63, 1);
   SSD1306_GotoXY(5, 5);
-  SSD1306_Puts("OLED:128x64", &Font_11x18, 1);
+  SSD1306_Puts("OLED:128x32", &Font_11x18, 1);
   SSD1306_GotoXY(10, 52);
   SSD1306_Puts("Font size: 11x18", &Font_6x10, 1);
   SSD1306_UpdateScreen();  // display
-  LL_mDelay(1000);
+  LL_mDelay(2000);
 
   SSD1306_Fill(0);
   SSD1306_GotoXY(5, 5);
