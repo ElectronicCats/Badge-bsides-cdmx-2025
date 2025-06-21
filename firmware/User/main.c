@@ -20,6 +20,7 @@
 __IO uint32_t i2cState = I2C_STATE_READY;
 
 static void APP_I2C_Config(void);
+static void APP_GPIO_Config(void);
 
 int main(void) {
   int y1, y2;
@@ -30,6 +31,7 @@ int main(void) {
   printf("I2C Demo: \r\nClock: %ld\r\n", SystemCoreClock);
 
   APP_I2C_Config();
+  APP_GPIO_Config();
 
   uint8_t res = SSD1306_Init();
   printf("OLED init: %d\n", res);
@@ -38,93 +40,53 @@ int main(void) {
   SSD1306_DrawBitmap(epd_bitmap_bsides_logo, 0, 0, 128, 32);
   SSD1306_UpdateScreen();
   LL_mDelay(2000);
+
   while (1) {
-    LL_mDelay(200);
-  }
+    char buf[20];
+    // Assuming Font_6x8 is available for a better fit on the screen
+    SSD1306_Fill(SSD1306_COLOR_BLACK);
 
-  SSD1306_DrawLine(0, 0, 127, 0, 1);
-  SSD1306_DrawLine(0, 0, 0, 63, 1);
-  SSD1306_DrawLine(127, 0, 127, 63, 1);
-  SSD1306_DrawLine(0, 63, 127, 63, 1);
-  SSD1306_GotoXY(5, 5);
-  SSD1306_Puts("OLED:128x32", &Font_11x18, 1);
-  SSD1306_GotoXY(10, 52);
-  SSD1306_Puts("Font size: 11x18", &Font_6x10, 1);
-  SSD1306_UpdateScreen();  // display
-  LL_mDelay(2000);
+    // DOWN: PA0
+    SSD1306_GotoXY(0, 0);
+    sprintf(buf, "DOWN:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0) ? "Released" : "Pressed");
+    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
 
-  SSD1306_Fill(0);
-  SSD1306_GotoXY(5, 5);
-  SSD1306_Puts("OLED:128x32", &Font_11x18, 1);
-  printf("OLED:128x32\r\n");
-  SSD1306_GotoXY(10, 52);
-  SSD1306_Puts("SSD1306 Demo", &Font_6x12, 1);
-  SSD1306_UpdateScreen();
-  LL_mDelay(1000);
+    // UP: PA1
+    SSD1306_GotoXY(0, 8);
+    sprintf(buf, "UP:    %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1) ? "Released" : "Pressed");
+    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
 
-  SSD1306_ToggleInvert();  // Invert display
-  SSD1306_UpdateScreen();
-  LL_mDelay(1000);
+    // BACK: PA5
+    SSD1306_GotoXY(0, 16);
+    sprintf(buf, "BACK:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5) ? "Released" : "Pressed");
+    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
 
-  SSD1306_ToggleInvert();  // Invert display
-  SSD1306_UpdateScreen();
-  LL_mDelay(1000);
+    // ENTER: PA6
+    SSD1306_GotoXY(0, 24);
+    sprintf(buf, "ENTER: %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_6) ? "Released" : "Pressed");
+    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
 
-  SSD1306_Fill(0);
-  y1 = 64, y2 = 0;
-  while (y1 > 0) {
-    SSD1306_DrawLine(0, y1, 127, y2, 1);
     SSD1306_UpdateScreen();
-    y1 -= 2;
-    y2 += 2;
+    LL_mDelay(100);
   }
-  LL_mDelay(1000);
+}
 
-  SSD1306_Fill(0);
-  y1 = 127, y2 = 0;
-  while (y1 > 0) {
-    SSD1306_DrawLine(y1, 0, y2, 63, 1);
-    SSD1306_UpdateScreen();
-    y1 -= 2;
-    y2 += 2;
-  }
-  LL_mDelay(1000);
+static void APP_GPIO_Config(void) {
+  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-  SSD1306_Fill(1);
-  SSD1306_UpdateScreen();
-  SSD1306_DrawCircle(64, 32, 25, 0);
-  SSD1306_UpdateScreen();
-  SSD1306_DrawCircle(128, 32, 25, 0);
-  SSD1306_UpdateScreen();
-  SSD1306_DrawCircle(0, 32, 25, 0);
-  SSD1306_UpdateScreen();
-  SSD1306_DrawCircle(32, 32, 25, 0);
-  SSD1306_UpdateScreen();
-  SSD1306_DrawCircle(96, 32, 25, 0);
-  SSD1306_UpdateScreen();
-  LL_mDelay(1000);
+  LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOA);
 
-  SSD1306_Fill(0);
-  SSD1306_UpdateScreen();
-  int32_t i = -100;
-  char buf[10];
-  while (i <= 100) {
-    memset(&buf[0], 0, sizeof(buf));
-    sprintf(buf, "%ld", i);
-    SSD1306_GotoXY(50, 27);
-    SSD1306_Puts(buf, &Font_6x10, 1);
-    SSD1306_DrawLine(64, 10, (i + 100) * 128 / 200, (i + 100) * 64 / 200, 1);
-    SSD1306_UpdateScreen();
-    SSD1306_Fill(0);
-    i++;
-  }
-  SSD1306_GotoXY(50, 27);
-  sprintf(buf, "END");
-  SSD1306_Puts(buf, &Font_6x10, 1);
-  SSD1306_UpdateScreen();
-
-  while (1)
-    ;
+  /*
+   * Buttons:
+   * DOWN:  PA0
+   * UP:    PA1
+   * BACK:  PA5
+   * ENTER: PA6
+   */
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_5 | LL_GPIO_PIN_6;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 }
 
 static void APP_I2C_Config(void) {
