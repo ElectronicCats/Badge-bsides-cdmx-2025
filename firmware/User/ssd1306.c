@@ -473,6 +473,20 @@ void SSD1306_DrawBitmap(const unsigned char* bitmap, uint8_t x, uint8_t y, uint8
     }
 }
 
+void SSD1306_DrawFilledRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
+{
+    uint8_t i, j;
+    if (x >= SSD1306_WIDTH || y >= SSD1306_HEIGHT) return;
+    if ((x + w) >= SSD1306_WIDTH) w = SSD1306_WIDTH - x;
+    if ((y + h) >= SSD1306_HEIGHT) h = SSD1306_HEIGHT - y;
+
+    for (i = y; i < y + h; i++) {
+        for (j = x; j < x + w; j++) {
+            SSD1306_DrawPixel(j, i, color);
+        }
+    }
+}
+
 void SSD1306_ON(void)
 {
     SSD1306_WriteCommand(0x8D);

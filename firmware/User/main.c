@@ -7,10 +7,12 @@
  */
 #include "main.h"
 #include <string.h>
+#include "bitmaps.h"
+#include "buttons.h"
 #include "py32f0xx_bsp_clock.h"
 #include "py32f0xx_bsp_printf.h"
 #include "ssd1306.h"
-#include "bitmaps.h"
+#include "menu.h"
 
 #define I2C_ADDRESS 0xA0 /* host/client address */
 #define I2C_STATE_READY 0
@@ -21,10 +23,9 @@ __IO uint32_t i2cState = I2C_STATE_READY;
 
 static void APP_I2C_Config(void);
 static void APP_GPIO_Config(void);
+static void Start_Interactive_App(void);
 
 int main(void) {
-  int y1, y2;
-
   BSP_RCC_HSI_24MConfig();
 
   BSP_USART_Config(115200);
@@ -32,6 +33,7 @@ int main(void) {
 
   APP_I2C_Config();
   APP_GPIO_Config();
+  Buttons_Init();
 
   uint8_t res = SSD1306_Init();
   printf("OLED init: %d\n", res);
@@ -42,32 +44,66 @@ int main(void) {
   LL_mDelay(2000);
 
   while (1) {
-    char buf[20];
-    // Assuming Font_6x8 is available for a better fit on the screen
-    SSD1306_Fill(SSD1306_COLOR_BLACK);
+    while (Menu_IsActive()) {
+      Menu_UpdateAndRender();
+      LL_mDelay(10);
+    }
 
-    // DOWN: PA0
-    SSD1306_GotoXY(0, 0);
-    sprintf(buf, "DOWN:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0) ? "Released" : "Pressed");
-    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+    // Menu has exited, run the interactive app
+    Start_Interactive_App();
 
-    // UP: PA1
-    SSD1306_GotoXY(0, 8);
-    sprintf(buf, "UP:    %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1) ? "Released" : "Pressed");
-    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+    // When app returns, re-initialize the menu
+    Menu_Init();
+  }
 
-    // BACK: PA5
-    SSD1306_GotoXY(0, 16);
-    sprintf(buf, "BACK:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5) ? "Released" : "Pressed");
-    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+  // while (1) {
+  //   char buf[20];
+  //   // Assuming Font_6x8 is available for a better fit on the screen
+  //   SSD1306_Fill(SSD1306_COLOR_BLACK);
 
-    // ENTER: PA6
-    SSD1306_GotoXY(0, 24);
-    sprintf(buf, "ENTER: %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_6) ? "Released" : "Pressed");
-    SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+  //   // DOWN: PA0
+  //   SSD1306_GotoXY(0, 0);
+  //   sprintf(buf, "DOWN:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0) ? "Released" : "Pressed");
+  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
 
-    SSD1306_UpdateScreen();
-    LL_mDelay(100);
+  //   // UP: PA1
+  //   SSD1306_GotoXY(0, 8);
+  //   sprintf(buf, "UP:    %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1) ? "Released" : "Pressed");
+  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+
+  //   // BACK: PA5
+  //   SSD1306_GotoXY(0, 16);
+  //   sprintf(buf, "BACK:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5) ? "Released" : "Pressed");
+  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+
+  //   // ENTER: PA6
+  //   SSD1306_GotoXY(0, 24);
+  //   sprintf(buf, "ENTER: %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_6) ? "Released" : "Pressed");
+  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
+
+  //   SSD1306_UpdateScreen();
+  //   LL_mDelay(100);
+  // }
+}
+
+static void Start_Interactive_App(void) {
+  // Placeholder for the "Interactive App"
+  SSD1306_Fill(SSD1306_COLOR_BLACK);
+  SSD1306_GotoXY(10, 2);
+  SSD1306_Puts("Interactive App", &Font_6x10, SSD1306_COLOR_WHITE);
+  SSD1306_GotoXY(10, 12);
+  SSD1306_Puts("is now running.", &Font_6x10, SSD1306_COLOR_WHITE);
+  SSD1306_GotoXY(15, 22);
+  SSD1306_Puts("Press BACK", &Font_6x10, SSD1306_COLOR_WHITE);
+  SSD1306_UpdateScreen();
+
+  // Wait for BACK button to return to menu
+  while (1) {
+    Buttons_Update();
+    if (Button_IsJustPressed(BTN_BACK)) {
+      return;  // Return to main loop, which will re-init the menu
+    }
+    LL_mDelay(10);
   }
 }
 
