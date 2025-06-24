@@ -33,7 +33,6 @@ int main(void) {
 
   APP_I2C_Config();
   APP_GPIO_Config();
-  Buttons_Init();
 
   uint8_t res = SSD1306_Init();
   printf("OLED init: %d\n", res);
@@ -100,7 +99,7 @@ static void Start_Interactive_App(void) {
   // Wait for BACK button to return to menu
   while (1) {
     Buttons_Update();
-    if (Button_IsJustPressed(BTN_BACK)) {
+    if (is_btn_back_pressed()) {
       return;  // Return to main loop, which will re-init the menu
     }
     LL_mDelay(10);

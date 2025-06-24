@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "menu.h"
 #include "buttons.h"
 #include "ascii_fonts.h"
@@ -42,6 +44,7 @@ void Menu_Exit(void) {
 }
 
 static void Menu_Render(void) {
+  printf("Rendering menu, selected index: %d\r\n", selected_index);
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_GotoXY(26, 0);  // Centered title
   SSD1306_Puts("BSides CDMX", &Font_6x10, SSD1306_COLOR_WHITE);
@@ -64,19 +67,22 @@ static void Menu_Render(void) {
 void Menu_UpdateAndRender(void) {
   Buttons_Update();
 
-  if (Button_IsJustPressed(BTN_UP)) {
+  if (is_btn_up_pressed()) {
+    printf("Button UP pressed\r\n");
     selected_index--;
     if (selected_index < 0) {
       selected_index = MAIN_MENU_ITEM_COUNT - 1;
     }
     needs_render = 1;
-  } else if (Button_IsJustPressed(BTN_DOWN)) {
+  } else if (is_btn_down_pressed()) {
+    printf("Button DOWN pressed\r\n");
     selected_index++;
     if (selected_index >= MAIN_MENU_ITEM_COUNT) {
       selected_index = 0;
     }
     needs_render = 1;
-  } else if (Button_IsJustPressed(BTN_ENTER)) {
+  } else if (is_btn_enter_pressed()) {
+    printf("Button ENTER pressed\r\n");
     if (mainMenuItems[selected_index].action) {
       mainMenuItems[selected_index].action();
       needs_render = 1;  // Rerender after action returns
@@ -108,7 +114,8 @@ static void Action_Creditos(void) {
   // Wait for back button
   while (1) {
     Buttons_Update();
-    if (Button_IsJustPressed(BTN_BACK)) {
+    if (is_btn_back_pressed()) {
+      printf("Button BACK pressed\r\n");
       break;
     }
     LL_mDelay(10);
