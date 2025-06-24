@@ -9,10 +9,10 @@
 #include <string.h>
 #include "bitmaps.h"
 #include "buttons.h"
+#include "menu.h"
 #include "py32f0xx_bsp_clock.h"
 #include "py32f0xx_bsp_printf.h"
 #include "ssd1306.h"
-#include "menu.h"
 
 #define I2C_ADDRESS 0xA0 /* host/client address */
 #define I2C_STATE_READY 0
@@ -35,7 +35,7 @@ int main(void) {
   APP_GPIO_Config();
 
   uint8_t res = SSD1306_Init();
-  printf("OLED init: %d\n", res);
+  printf("OLED init: %s\n", res == 0 ? "ERROR" : "OK");
 
   SSD1306_UpdateScreen();
   SSD1306_DrawBitmap(epd_bitmap_bsides_logo, 0, 0, 128, 32);
@@ -43,46 +43,9 @@ int main(void) {
   LL_mDelay(2000);
 
   while (1) {
-    while (Menu_IsActive()) {
-      Menu_UpdateAndRender();
-      LL_mDelay(10);
-    }
-
-    // Menu has exited, run the interactive app
-    Start_Interactive_App();
-
-    // When app returns, re-initialize the menu
-    Menu_Init();
+    Menu_UpdateAndRender();
+    LL_mDelay(10);
   }
-
-  // while (1) {
-  //   char buf[20];
-  //   // Assuming Font_6x8 is available for a better fit on the screen
-  //   SSD1306_Fill(SSD1306_COLOR_BLACK);
-
-  //   // DOWN: PA0
-  //   SSD1306_GotoXY(0, 0);
-  //   sprintf(buf, "DOWN:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0) ? "Released" : "Pressed");
-  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
-
-  //   // UP: PA1
-  //   SSD1306_GotoXY(0, 8);
-  //   sprintf(buf, "UP:    %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1) ? "Released" : "Pressed");
-  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
-
-  //   // BACK: PA5
-  //   SSD1306_GotoXY(0, 16);
-  //   sprintf(buf, "BACK:  %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5) ? "Released" : "Pressed");
-  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
-
-  //   // ENTER: PA6
-  //   SSD1306_GotoXY(0, 24);
-  //   sprintf(buf, "ENTER: %s", LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_6) ? "Released" : "Pressed");
-  //   SSD1306_Puts(buf, &Font_6x8, SSD1306_COLOR_WHITE);
-
-  //   SSD1306_UpdateScreen();
-  //   LL_mDelay(100);
-  // }
 }
 
 static void Start_Interactive_App(void) {
@@ -98,7 +61,6 @@ static void Start_Interactive_App(void) {
 
   // Wait for BACK button to return to menu
   while (1) {
-    Buttons_Update();
     if (is_btn_back_pressed()) {
       return;  // Return to main loop, which will re-init the menu
     }

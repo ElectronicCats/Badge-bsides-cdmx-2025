@@ -40,12 +40,14 @@ uint8_t Menu_IsActive(void) {
 }
 
 void Menu_Exit(void) {
+  printf("Exiting menu\r\n");
   menu_active = 0;
 }
 
 static void Menu_Render(void) {
   printf("Rendering menu, selected index: %d\r\n", selected_index);
   SSD1306_Fill(SSD1306_COLOR_BLACK);
+  SSD1306_UpdateScreen();
   SSD1306_GotoXY(26, 0);  // Centered title
   SSD1306_Puts("BSides CDMX", &Font_6x10, SSD1306_COLOR_WHITE);
 
@@ -61,12 +63,11 @@ static void Menu_Render(void) {
       SSD1306_Puts((char*)mainMenuItems[i].name, &Font_6x10, SSD1306_COLOR_WHITE);
     }
   }
+  printf("Selected item: %s\r\n", mainMenuItems[selected_index].name);
   SSD1306_UpdateScreen();
 }
 
 void Menu_UpdateAndRender(void) {
-  Buttons_Update();
-
   if (is_btn_up_pressed()) {
     printf("Button UP pressed\r\n");
     selected_index--;
@@ -98,11 +99,31 @@ void Menu_UpdateAndRender(void) {
 // --- Menu Action Implementations ---
 
 static void Action_Conectar(void) {
-  Menu_Exit();
+  SSD1306_Fill(SSD1306_COLOR_BLACK);
+  SSD1306_UpdateScreen();
+  SSD1306_GotoXY(3, 2);
+  SSD1306_Puts("Esperando conexion", &Font_6x10, SSD1306_COLOR_WHITE);
+  SSD1306_GotoXY(3, 12);
+  SSD1306_Puts("con badges...", &Font_6x10, SSD1306_COLOR_WHITE);
+  SSD1306_UpdateScreen();
+
+  uint8_t dot_count = 0;
+  uint32_t last_dot_time = 0;
+  uint32_t current_time = 0;
+
+  // Wait for back button with animated dots
+  while (1) {
+    if (is_btn_back_pressed()) {
+      printf("Button BACK pressed\r\n");
+      break;
+    }
+    LL_mDelay(10);
+  }
 }
 
 static void Action_Creditos(void) {
   SSD1306_Fill(SSD1306_COLOR_BLACK);
+  SSD1306_UpdateScreen();
   SSD1306_GotoXY(3, 2);
   SSD1306_Puts("Firmware by:", &Font_6x10, SSD1306_COLOR_WHITE);
   SSD1306_GotoXY(3, 12);
@@ -113,7 +134,6 @@ static void Action_Creditos(void) {
 
   // Wait for back button
   while (1) {
-    Buttons_Update();
     if (is_btn_back_pressed()) {
       printf("Button BACK pressed\r\n");
       break;
