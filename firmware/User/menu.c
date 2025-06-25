@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "py32f0xx_bsp_printf.h"
 #include "py32f0xx_ll_bus.h"
 #include "py32f0xx_ll_gpio.h"
 #include "py32f0xx_ll_usart.h"
-#include "py32f0xx_bsp_printf.h"
 
 #include "ascii_fonts.h"
 #include "buttons.h"
@@ -130,7 +130,7 @@ static void UART_Listener_Init(void) {
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-  GPIO_InitStruct.Alternate = LL_GPIO_AF_4; // AF4 for USART2 on PA2/PA3
+  GPIO_InitStruct.Alternate = LL_GPIO_AF_4;  // AF4 for USART2 on PA2/PA3
 
   // PA2 (TX)
   GPIO_InitStruct.Pin = LL_GPIO_PIN_2;
@@ -168,6 +168,24 @@ static void UART_Listener_DeInit(void) {
   LL_APB1_GRP1_DisableClock(LL_APB1_GRP1_PERIPH_USART2);
 }
 
+/**
+ * Send one char to UART port
+ */
+void APP_UART_TxChar(char ch) {
+  LL_USART_TransmitData8(USART2, ch);
+  while (!LL_USART_IsActiveFlag_TC(USART2))
+    ;
+  LL_USART_ClearFlag_TC(USART2);
+}
+
+/**
+ * Send one string (a serial of chars end with '\0') to UART port
+ */
+void APP_UART_TxString(char* str) {
+  while (*str)
+    APP_UART_TxChar(*str++);
+}
+
 static void Action_Conectar(void) {
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_UpdateScreen();
@@ -184,7 +202,7 @@ static void Action_Conectar(void) {
   while (1) {
     if (is_btn_back_pressed()) {
       printf("Button BACK pressed, stopping listener.\r\n");
-      UART_Listener_DeInit(); // Clean up before exiting
+      UART_Listener_DeInit();  // Clean up before exiting
       BSP_USART_Config(115200);
       printf("UART2 Received: %s\r\n", uart_rx_buf);
       break;
@@ -194,9 +212,14 @@ static void Action_Conectar(void) {
     if (uart_rx_flag) {
       // A new message is available in uart_rx_buf.
       // We print it to the main debug port (USART1) for demonstration.
-      printf("UART2 Received: %s\r\n", uart_rx_buf);
+      // printf("UART2 Received: %s\r\n", uart_rx_buf);
+      APP_UART_TxString("Connected to badge: ");
+      APP_UART_TxString("\r\n");
+      APP_UART_TxString((char*)uart_rx_buf);
+      APP_UART_TxString("\r\n");
 
       // Clear the message area and display the received message on screen
+      SSD1306_UpdateScreen();
       SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
       SSD1306_GotoXY(3, 22);
       SSD1306_Puts("Message received", &Font_6x10, SSD1306_COLOR_WHITE);
@@ -207,7 +230,7 @@ static void Action_Conectar(void) {
       uart_rx_flag = 0;
     }
 
-    LL_mDelay(20); // Small delay to yield CPU time
+    LL_mDelay(20);  // Small delay to yield CPU time
   }
 }
 
@@ -240,8 +263,7 @@ static void Action_Creditos(void) {
  *       in this example, but in a larger project, it might be better located
  *       in a dedicated interrupt handling file (e.g., main.c or py32f0xx_it.c).
  */
-void USART2_IRQHandler(void)
-{
+void USART2_IRQHandler(void) {
   UART_Listener_IRQCallback();
 }
 
@@ -249,8 +271,7 @@ void USART2_IRQHandler(void)
  * @brief Callback function for the USART2 interrupt.
  *        Handles character reception and error flags.
  */
-static void UART_Listener_IRQCallback(void)
-{
+static void UART_Listener_IRQCallback(void) {
   // Check for Overrun, Framing, or Noise errors and clear them
   if (LL_USART_IsActiveFlag_ORE(USART2) || LL_USART_IsActiveFlag_FE(USART2) || LL_USART_IsActiveFlag_NE(USART2)) {
     LL_USART_ClearFlag_ORE(USART2);
@@ -260,26 +281,20 @@ static void UART_Listener_IRQCallback(void)
   }
 
   // Check if the RXNE (Read Not Empty) flag is set and the interrupt is enabled
-  if (LL_USART_IsActiveFlag_RXNE(USART2) && LL_USART_IsEnabledIT_RXNE(USART2))
-  {
+  if (LL_USART_IsActiveFlag_RXNE(USART2) && LL_USART_IsEnabledIT_RXNE(USART2)) {
     // Read the received byte. This action also clears the RXNE flag.
     uint8_t ch = LL_USART_ReceiveData8(USART2);
 
-    // Check for end-of-line characters, indicating a complete command
-    if (ch == '\r' || ch == '\n')
-    {
+    // Check for dot, indicating a complete command
+    if (ch == '.') {
       // If there's data in the buffer, null-terminate it and set the flag
-      if (uart_rx_pos > 0)
-      {
+      if (uart_rx_pos > 0) {
         uart_rx_buf[uart_rx_pos] = '\0';
-        uart_rx_flag = 1; // Signal to the main loop that a message is ready
+        uart_rx_flag = 1;  // Signal to the main loop that a message is ready
       }
-    }
-    else
-    {
+    } else {
       // Add the character to the buffer if there's space
-      if (uart_rx_pos < (UART_BUF_SIZE - 1))
-      {
+      if (uart_rx_pos < (UART_BUF_SIZE - 1)) {
         uart_rx_buf[uart_rx_pos++] = ch;
       }
       // If the buffer is full, we ignore further characters until the next newline.
