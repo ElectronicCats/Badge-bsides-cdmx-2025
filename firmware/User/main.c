@@ -43,8 +43,23 @@ int main(void) {
   SSD1306_UpdateScreen();
   SSD1306_DrawBitmap(epd_bitmap_bsides_logo, 0, 0, 128, 32);
   SSD1306_UpdateScreen();
-  LL_mDelay(2000);
 
+  // Wait for any button press
+  while (1) {
+    if (is_btn_back_pressed()) {
+      break;
+    }
+    if (is_btn_enter_pressed()) {
+      break;
+    }
+    if (is_btn_down_pressed()) {
+      break;
+    }
+    if (is_btn_up_pressed()) {
+      break;
+    }
+  }
+  
   while (1) {
     Menu_UpdateAndRender();
     i = (i + 1) % WS2812_NUM_LEDS;
