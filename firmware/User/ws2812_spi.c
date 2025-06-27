@@ -5,10 +5,8 @@
 #include <string.h>
 #include "ws2812_spi.h"
 
-/**
- * @brief Value from 0 to 255
- */
-#define BRIGHTNESS 10
+static uint8_t _brightness = DEFAULT_BRIGHTNESS;
+static uint8_t _r, _g, _b = 0;
 
 #define WS2812_FILL_BUFFER(COLOR) \
     for( uint8_t mask = 0x80; mask; mask >>= 1 ) { \
@@ -33,20 +31,27 @@ void ws2812_send_spi(void)
 
 void ws2812_pixel(uint16_t led_no, uint8_t r, uint8_t g, uint8_t b) {
     // RGB values can't be more than BRIGHTNESS
-    r = (r * BRIGHTNESS) / 255;
-    g = (g * BRIGHTNESS) / 255;
-    b = (b * BRIGHTNESS) / 255;
+    r = (r * _brightness) / 255;
+    g = (g * _brightness) / 255;
+    b = (b * _brightness) / 255;
+    _r = r;
+    _g = g;
+    _b = b;
 
     uint8_t * ptr = &ws2812_buffer[24 * led_no];
     WS2812_FILL_BUFFER(g);
     WS2812_FILL_BUFFER(r);
     WS2812_FILL_BUFFER(b);
+    ws2812_send_spi();
 }
 
 void ws2812_pixel_all(uint8_t r, uint8_t g, uint8_t b) {
-    r = (r * BRIGHTNESS) / 255;
-    g = (g * BRIGHTNESS) / 255;
-    b = (b * BRIGHTNESS) / 255;
+    r = (r * _brightness) / 255;
+    g = (g * _brightness) / 255;
+    b = (b * _brightness) / 255;
+    _r = r;
+    _g = g;
+    _b = b;
 
     uint8_t * ptr = ws2812_buffer;
     for( uint16_t i = 0; i < WS2812_NUM_LEDS; ++i) {
@@ -54,4 +59,10 @@ void ws2812_pixel_all(uint8_t r, uint8_t g, uint8_t b) {
         WS2812_FILL_BUFFER(r);
         WS2812_FILL_BUFFER(b);
     }
+    ws2812_send_spi();
+}
+
+void ws2812_set_brightness(uint8_t brightness) {
+    _brightness = brightness;
+    ws2812_pixel_all(_r, _g, _b);
 }

@@ -11,6 +11,7 @@
 #include "main.h"
 #include "menu.h"
 #include "ssd1306.h"
+#include "ws2812_spi.h"
 
 // Buffer and flags for UART communication
 #define UART_BUF_SIZE 128
@@ -24,8 +25,9 @@ static void UART_Listener_DeInit(void);
 static void UART_Listener_IRQCallback(void);
 
 // Menu actions
-static void Action_Conectar(void);
-static void Action_Creditos(void);
+static void connect_action();
+static void credits_action();
+static void settings_action();
 
 // Menu item definition
 typedef struct {
@@ -35,8 +37,9 @@ typedef struct {
 
 // Menu definitions
 static const MenuItem_t mainMenuItems[] = {
-    {"Conectar", Action_Conectar},
-    {"Creditos", Action_Creditos},
+    {"Conectar", connect_action},
+    {"Ajustes", settings_action},
+    {"Creditos", credits_action},
 };
 
 #define MAIN_MENU_ITEM_COUNT (sizeof(mainMenuItems) / sizeof(MenuItem_t))
@@ -45,6 +48,148 @@ static const MenuItem_t mainMenuItems[] = {
 static int8_t selected_index = 0;
 static uint8_t menu_active = 1;
 static uint8_t needs_render = 1;
+
+// Action to turn LEDs on to default brightness
+static void leds_on_action(void) {
+    ws2812_set_brightness(DEFAULT_BRIGHTNESS); 
+    
+    // Display confirmation
+    SSD1306_Fill(SSD1306_COLOR_BLACK);
+    SSD1306_UpdateScreen();
+    SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
+    SSD1306_GotoXY(20, 16);
+    SSD1306_Puts("LEDs Encendidos", &Font_6x10, SSD1306_COLOR_WHITE);
+    SSD1306_UpdateScreen();
+    LL_mDelay(1000);
+}
+
+// Action to turn LEDs off
+static void leds_off_action(void) {
+    ws2812_set_brightness(0);
+
+    // Display confirmation
+    SSD1306_Fill(SSD1306_COLOR_BLACK);
+    SSD1306_UpdateScreen();
+    SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
+    SSD1306_GotoXY(20, 16);
+    SSD1306_Puts("LEDs Apagados", &Font_6x10, SSD1306_COLOR_WHITE);
+    SSD1306_UpdateScreen();
+    LL_mDelay(1000);
+}
+
+// Definition for the "LEDs" submenu
+static const MenuItem_t ledsMenuItems[] = {
+    {"Encender", leds_on_action},
+    {"Apagar", leds_off_action},
+};
+#define LEDS_MENU_ITEM_COUNT (sizeof(ledsMenuItems) / sizeof(MenuItem_t))
+
+// Function to manage and render the "LEDs" submenu
+static void leds_submenu_action(void) {
+    int8_t leds_selected_index = 0;
+    uint8_t leds_needs_render = 1;
+
+    while (1) {
+        if (is_btn_up_pressed()) {
+            leds_selected_index--;
+            if (leds_selected_index < 0) {
+                leds_selected_index = LEDS_MENU_ITEM_COUNT - 1;
+            }
+            leds_needs_render = 1;
+        } else if (is_btn_down_pressed()) {
+            leds_selected_index++;
+            if (leds_selected_index >= LEDS_MENU_ITEM_COUNT) {
+                leds_selected_index = 0;
+            }
+            leds_needs_render = 1;
+        } else if (is_btn_enter_pressed()) {
+            if (ledsMenuItems[leds_selected_index].action) {
+                ledsMenuItems[leds_selected_index].action();
+            }
+            leds_needs_render = 1; // Rerender after action
+        } else if (is_btn_back_pressed()) {
+            break; // Exit to parent menu
+        }
+
+        if (leds_needs_render) {
+            SSD1306_Fill(SSD1306_COLOR_BLACK);
+            SSD1306_UpdateScreen();
+            SSD1306_GotoXY(45, 0); // Centered title
+            SSD1306_Puts("LEDs", &Font_6x10, SSD1306_COLOR_WHITE);
+            // SSD1306_UpdateScreen();
+
+            for (uint8_t i = 0; i < LEDS_MENU_ITEM_COUNT; i++) {
+                uint8_t y_pos = 12 + i * 10;
+                SSD1306_GotoXY(10, y_pos);
+                if (i == leds_selected_index) {
+                    SSD1306_DrawFilledRectangle(0, y_pos - 1, SSD1306_WIDTH, 10, SSD1306_COLOR_WHITE);
+                    SSD1306_Puts((char*)ledsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_BLACK);
+                } else {
+                    SSD1306_Puts((char*)ledsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_WHITE);
+                }
+            }
+            SSD1306_UpdateScreen();
+            leds_needs_render = 0;
+        }
+        LL_mDelay(20);
+    }
+}
+
+// Definition for the "Ajustes" menu
+static const MenuItem_t settingsMenuItems[] = {
+    {"LEDs", leds_submenu_action},
+};
+#define SETTINGS_MENU_ITEM_COUNT (sizeof(settingsMenuItems) / sizeof(MenuItem_t))
+
+// Function to manage and render the "Ajustes" menu
+static void settings_action(void) {
+    int8_t settings_selected_index = 0;
+    uint8_t settings_needs_render = 1;
+
+    while (1) {
+        if (is_btn_up_pressed()) {
+            settings_selected_index--;
+            if (settings_selected_index < 0) {
+                settings_selected_index = SETTINGS_MENU_ITEM_COUNT - 1;
+            }
+            settings_needs_render = 1;
+        } else if (is_btn_down_pressed()) {
+            settings_selected_index++;
+            if (settings_selected_index >= SETTINGS_MENU_ITEM_COUNT) {
+                settings_selected_index = 0;
+            }
+            settings_needs_render = 1;
+        } else if (is_btn_enter_pressed()) {
+            if (settingsMenuItems[settings_selected_index].action) {
+                settingsMenuItems[settings_selected_index].action();
+            }
+            settings_needs_render = 1; // Rerender after action
+        } else if (is_btn_back_pressed()) {
+            break; // Exit to main menu
+        }
+
+        if (settings_needs_render) {
+            SSD1306_Fill(SSD1306_COLOR_BLACK);
+            SSD1306_UpdateScreen();
+            SSD1306_GotoXY(35, 0); // Centered title
+            SSD1306_Puts("Ajustes", &Font_6x10, SSD1306_COLOR_WHITE);
+
+            for (uint8_t i = 0; i < SETTINGS_MENU_ITEM_COUNT; i++) {
+                uint8_t y_pos = 12 + i * 10;
+                SSD1306_GotoXY(10, y_pos);
+                if (i == settings_selected_index) {
+                    SSD1306_DrawFilledRectangle(0, y_pos - 1, SSD1306_WIDTH, 10, SSD1306_COLOR_WHITE);
+                    SSD1306_Puts((char*)settingsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_BLACK);
+                } else {
+                    SSD1306_Puts((char*)settingsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_WHITE);
+                }
+            }
+            SSD1306_UpdateScreen();
+            settings_needs_render = 0;
+        }
+        LL_mDelay(20);
+    }
+}
 
 void Menu_Init(void) {
   selected_index = 0;
@@ -186,7 +331,7 @@ void APP_UART_TxString(char* str) {
     APP_UART_TxChar(*str++);
 }
 
-static void Action_Conectar(void) {
+static void connect_action(void) {
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_UpdateScreen();
   SSD1306_GotoXY(3, 2);
@@ -234,7 +379,7 @@ static void Action_Conectar(void) {
   }
 }
 
-static void Action_Creditos(void) {
+static void credits_action(void) {
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_UpdateScreen();
   SSD1306_GotoXY(3, 2);

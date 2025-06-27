@@ -58,13 +58,15 @@ int main(void) {
     if (is_btn_up_pressed()) {
       break;
     }
+    i = (i + 1) % WS2812_NUM_LEDS;
+    ws2812_pixel(i, r++, g++, b++);
+    LL_mDelay(10);
   }
   
   while (1) {
     Menu_UpdateAndRender();
     i = (i + 1) % WS2812_NUM_LEDS;
     ws2812_pixel(i, r++, g++, b++);
-    ws2812_send_spi();
     LL_mDelay(10);
   }
 }
