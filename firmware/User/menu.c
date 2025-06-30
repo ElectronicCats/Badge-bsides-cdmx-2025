@@ -29,6 +29,12 @@ static void connect_action();
 static void credits_action();
 static void settings_action();
 
+typedef struct {
+  uint8_t r, g, b;
+} RGBColor;
+
+static volatile RGBColor current_color = {0, 0x60, 0xC0};
+
 // Menu item definition
 typedef struct {
   const char* name;
@@ -354,6 +360,9 @@ void APP_UART_TxString(char* str) {
 }
 
 static void connect_action(void) {
+  char tx_buf[32];
+  const uint32_t tx_interval = 100;  // Transmit every 100ms
+
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_UpdateScreen();
   SSD1306_GotoXY(3, 2);
@@ -365,40 +374,52 @@ static void connect_action(void) {
   // Initialize and start the UART listener
   UART_Listener_Init();
   printf("UART listener started on USART2.\r\n");
+  bool syncronized = false;
 
   while (1) {
+    // Animate local LEDs with the current (potentially synchronized) color
     i = (i + 1) % WS2812_NUM_LEDS;
-    ws2812_pixel(i, r++, g++, b++);
+    if (!syncronized) {
+      ws2812_pixel(i, current_color.r++, current_color.g++, current_color.b++);
+    } else {
+      ws2812_pixel(i, current_color.r, current_color.g, current_color.b);
+    }
 
     if (is_btn_back_pressed()) {
       printf("Button BACK pressed, stopping listener.\r\n");
       UART_Listener_DeInit();  // Clean up before exiting
       BSP_USART_Config(115200);
-      printf("UART2 Received: %s\r\n", uart_rx_buf);
       break;
     }
 
     // Check if a complete message has been received via UART
     if (uart_rx_flag) {
-      // A new message is available in uart_rx_buf.
-      // We print it to the main debug port (USART1) for demonstration.
-      // printf("UART2 Received: %s\r\n", uart_rx_buf);
-      APP_UART_TxString("Connected to badge: ");
-      APP_UART_TxString("\r\n");
-      APP_UART_TxString((char*)uart_rx_buf);
-      APP_UART_TxString("\r\n");
+      syncronized = true;
+      // APP_UART_TxString("Message received: ");
+      // APP_UART_TxString((char*)uart_rx_buf);
+      // APP_UART_TxChar('\n');
+      // Check if it's a valid RGB command
+      int r_val, g_val, b_val;
+      if (sscanf((char*)uart_rx_buf, "rgb:%d,%d,%d.", &r_val, &g_val, &b_val) == 3) {
+        // Valid command received, update local color
+        current_color.r = (uint8_t)r_val;
+        current_color.g = (uint8_t)g_val;
+        current_color.b = (uint8_t)b_val;
 
-      // Clear the message area and display the received message on screen
-      SSD1306_UpdateScreen();
-      SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
-      SSD1306_GotoXY(3, 22);
-      SSD1306_Puts("Message received", &Font_6x10, SSD1306_COLOR_WHITE);
-      SSD1306_UpdateScreen();
+        SSD1306_UpdateScreen();
+        SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
+        SSD1306_GotoXY(3, 22);
+        SSD1306_Puts("Color Sync!", &Font_6x10, SSD1306_COLOR_WHITE);
+        SSD1306_UpdateScreen();
+      }
 
       // Reset the flag and buffer position for the next message
       uart_rx_pos = 0;
       uart_rx_flag = 0;
     }
+
+    snprintf(tx_buf, sizeof(tx_buf), "rgb:%d,%d,%d.", current_color.r, current_color.g, current_color.b);
+    APP_UART_TxString(tx_buf);
 
     LL_mDelay(20);  // Small delay to yield CPU time
   }
@@ -450,6 +471,7 @@ static void UART_Listener_IRQCallback(void) {
     LL_USART_ClearFlag_ORE(USART2);
     LL_USART_ClearFlag_FE(USART2);
     LL_USART_ClearFlag_NE(USART2);
+    uart_rx_pos = 0;  // Discard partial data on error
     return;
   }
 
@@ -458,7 +480,7 @@ static void UART_Listener_IRQCallback(void) {
     // Read the received byte. This action also clears the RXNE flag.
     uint8_t ch = LL_USART_ReceiveData8(USART2);
 
-    // Check for dot, indicating a complete command
+    // Check for newline character, indicating a complete command
     if (ch == '.') {
       // If there's data in the buffer, null-terminate it and set the flag
       if (uart_rx_pos > 0) {
