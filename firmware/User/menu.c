@@ -13,6 +13,24 @@
 #include "ssd1306.h"
 #include "ws2812_spi.h"
 
+static const char* credits_lines[] = {
+    "Gracias a los",
+    "patrocinadores HSBC",
+    "Gracias a Electronic",
+    "Cats Team",
+    "Hardware: Uri,",
+    "Capuchino, Lizeth,",
+    "Yoshio y Carlos",
+    "Firmware: Francisco",
+    " - @deimoshall",
+    "",
+    "Hecho con amor",
+    "desde Mexico"
+};
+#define CREDITS_LINE_COUNT (sizeof(credits_lines) / sizeof(credits_lines[0]))
+#define CREDITS_FONT_HEIGHT 10
+#define CREDITS_VISIBLE_LINES 3
+
 // Buffer and flags for UART communication
 #define UART_BUF_SIZE 128
 static uint8_t uart_rx_buf[UART_BUF_SIZE];
@@ -431,26 +449,42 @@ static void connect_action(void) {
 }
 
 static void credits_action(void) {
-  SSD1306_Fill(SSD1306_COLOR_BLACK);
-  SSD1306_UpdateScreen();
-  SSD1306_GotoXY(3, 2);
-  SSD1306_Puts("Firmware by:", &Font_6x10, SSD1306_COLOR_WHITE);
-  SSD1306_GotoXY(3, 12);
-  SSD1306_Puts("Electronic Cats", &Font_6x10, SSD1306_COLOR_WHITE);
-  SSD1306_GotoXY(15, 22);
-  SSD1306_Puts("Press BACK", &Font_6x10, SSD1306_COLOR_WHITE);
-  SSD1306_UpdateScreen();
+  int8_t scroll_offset = 0;
+  uint8_t needs_render = 1;
 
-  // Wait for back button
   while (1) {
     i = (i + 1) % WS2812_NUM_LEDS;
     ws2812_pixel(i, r++, g++, b++);
 
-    if (is_btn_back_pressed()) {
+    if (is_btn_up_pressed()) {
+      if (scroll_offset > 0) {
+        scroll_offset--;
+        needs_render = 1;
+      }
+    } else if (is_btn_down_pressed()) {
+      if (scroll_offset < (CREDITS_LINE_COUNT - CREDITS_VISIBLE_LINES)) {
+        scroll_offset++;
+        needs_render = 1;
+      }
+    } else if (is_btn_back_pressed()) {
       printf("Button BACK pressed\r\n");
       break;
     }
-    LL_mDelay(10);
+
+    if (needs_render) {
+      SSD1306_Fill(SSD1306_COLOR_BLACK);
+      SSD1306_UpdateScreen();
+      for (uint8_t line = 0; line < CREDITS_VISIBLE_LINES; ++line) {
+        uint8_t idx = scroll_offset + line;
+        if (idx >= CREDITS_LINE_COUNT)
+          break;
+        SSD1306_GotoXY(0, 2 + line * CREDITS_FONT_HEIGHT);
+        SSD1306_Puts((char*)credits_lines[idx], &Font_6x10, SSD1306_COLOR_WHITE);
+      }
+      SSD1306_UpdateScreen();
+      needs_render = 0;
+    }
+    LL_mDelay(20);
   }
 }
 
