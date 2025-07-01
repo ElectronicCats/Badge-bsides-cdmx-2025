@@ -21,6 +21,7 @@ extern "C" {
 #define DEFAULT_BRIGHTNESS 10
 
 extern uint8_t ws2812_buffer[];
+// extern uint8_t _brightness;
 
 void ws2812_init(void);
 void ws2812_send_spi(void);

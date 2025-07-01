@@ -25,8 +25,7 @@ static const char* credits_lines[] = {
     " - @deimoshall",
     "",
     "Hecho con amor",
-    "desde Mexico"
-};
+    "desde Mexico"};
 #define CREDITS_LINE_COUNT (sizeof(credits_lines) / sizeof(credits_lines[0]))
 #define CREDITS_FONT_HEIGHT 10
 #define CREDITS_VISIBLE_LINES 3
@@ -46,6 +45,7 @@ static void UART_Listener_IRQCallback(void);
 static void connect_action();
 static void credits_action();
 static void settings_action();
+static void leds_brightness_action();
 
 typedef struct {
   uint8_t r, g, b;
@@ -104,11 +104,13 @@ static void leds_off_action(void) {
 static const MenuItem_t ledsMenuItems[] = {
     {"Encender", leds_on_action},
     {"Apagar", leds_off_action},
+    {"Brillo", leds_brightness_action},
 };
 #define LEDS_MENU_ITEM_COUNT (sizeof(ledsMenuItems) / sizeof(MenuItem_t))
 
 static void leds_submenu_action(void) {
   int8_t leds_selected_index = 0;
+  int8_t leds_menu_offset = 0;
   uint8_t leds_needs_render = 1;
 
   while (1) {
@@ -120,11 +122,23 @@ static void leds_submenu_action(void) {
       if (leds_selected_index < 0) {
         leds_selected_index = LEDS_MENU_ITEM_COUNT - 1;
       }
+      // Update offset if selection is out of view
+      if (leds_selected_index < leds_menu_offset) {
+        leds_menu_offset = leds_selected_index;
+      } else if (leds_selected_index == LEDS_MENU_ITEM_COUNT - 1) {
+        leds_menu_offset = LEDS_MENU_ITEM_COUNT > MAX_VISIBLE_MENU_ITEMS ? LEDS_MENU_ITEM_COUNT - MAX_VISIBLE_MENU_ITEMS : 0;
+      }
       leds_needs_render = 1;
     } else if (is_btn_down_pressed()) {
       leds_selected_index++;
       if (leds_selected_index >= LEDS_MENU_ITEM_COUNT) {
         leds_selected_index = 0;
+      }
+      // Update offset if selection is out of view
+      if (leds_selected_index >= leds_menu_offset + MAX_VISIBLE_MENU_ITEMS) {
+        leds_menu_offset = leds_selected_index - MAX_VISIBLE_MENU_ITEMS + 1;
+      } else if (leds_selected_index == 0) {
+        leds_menu_offset = 0;
       }
       leds_needs_render = 1;
     } else if (is_btn_enter_pressed()) {
@@ -142,14 +156,18 @@ static void leds_submenu_action(void) {
       SSD1306_GotoXY(45, 0);
       SSD1306_Puts("LEDs", &Font_6x10, SSD1306_COLOR_WHITE);
 
-      for (uint8_t i = 0; i < LEDS_MENU_ITEM_COUNT; i++) {
+      for (uint8_t i = 0; i < MAX_VISIBLE_MENU_ITEMS; i++) {
+        uint8_t item_index = leds_menu_offset + i;
+        if (item_index >= LEDS_MENU_ITEM_COUNT) {
+          break;
+        }
         uint8_t y_pos = 12 + i * 10;
         SSD1306_GotoXY(10, y_pos);
-        if (i == leds_selected_index) {
+        if (item_index == leds_selected_index) {
           SSD1306_DrawFilledRectangle(0, y_pos - 1, SSD1306_WIDTH, 10, SSD1306_COLOR_WHITE);
-          SSD1306_Puts((char*)ledsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_BLACK);
+          SSD1306_Puts((char*)ledsMenuItems[item_index].name, &Font_6x10, SSD1306_COLOR_BLACK);
         } else {
-          SSD1306_Puts((char*)ledsMenuItems[i].name, &Font_6x10, SSD1306_COLOR_WHITE);
+          SSD1306_Puts((char*)ledsMenuItems[item_index].name, &Font_6x10, SSD1306_COLOR_WHITE);
         }
       }
       SSD1306_UpdateScreen();
@@ -214,6 +232,54 @@ static void settings_action(void) {
       settings_needs_render = 0;
     }
     LL_mDelay(20);
+  }
+}
+
+static void leds_brightness_action(void) {
+  uint8_t percent = 100;
+  uint8_t needs_render = 1;
+
+  // Get current brightness as percent
+  extern uint8_t _brightness;
+  percent = (_brightness * 100 + 127) / 255;  // Round to nearest percent
+
+  // Snap to nearest 10%
+  percent = (percent / 10) * 10;
+
+  while (1) {
+    if (is_btn_up_pressed()) {
+      if (percent < 100) {
+        percent += 10;
+        needs_render = 1;
+      }
+    } else if (is_btn_down_pressed()) {
+      if (percent > 0) {
+        percent -= 10;
+        needs_render = 1;
+      }
+    } else if (is_btn_back_pressed()) {
+      break;
+    }
+
+    if (needs_render) {
+      SSD1306_Fill(SSD1306_COLOR_BLACK);
+      SSD1306_UpdateScreen();
+      SSD1306_GotoXY(15, 8);
+      SSD1306_Puts("Brillo NeoPixels", &Font_6x10, SSD1306_COLOR_WHITE);
+
+      char buf[20];
+      snprintf(buf, sizeof(buf), "%3d%%", percent);
+      SSD1306_GotoXY(50, 20);
+      SSD1306_Puts(buf, &Font_6x10, SSD1306_COLOR_WHITE);
+      SSD1306_UpdateScreen();
+
+      // Set brightness
+      uint8_t value = (percent * 255) / 100;
+      ws2812_set_brightness(value);
+
+      needs_render = 0;
+    }
+    LL_mDelay(100);
   }
 }
 

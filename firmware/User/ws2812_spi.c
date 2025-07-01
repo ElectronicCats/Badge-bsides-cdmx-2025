@@ -5,7 +5,7 @@
 #include <string.h>
 #include "ws2812_spi.h"
 
-static uint8_t _brightness = DEFAULT_BRIGHTNESS;
+extern uint8_t _brightness = DEFAULT_BRIGHTNESS;
 static uint8_t _r, _g, _b = 0;
 
 #define WS2812_FILL_BUFFER(COLOR) \
