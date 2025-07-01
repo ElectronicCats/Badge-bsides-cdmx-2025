@@ -386,9 +386,9 @@ static void connect_action(void) {
     }
 
     if (is_btn_back_pressed()) {
-      printf("Button BACK pressed, stopping listener.\r\n");
       UART_Listener_DeInit();  // Clean up before exiting
       BSP_USART_Config(115200);
+      printf("Button BACK pressed, stopping listener.\r\n");
       break;
     }
 
@@ -406,10 +406,15 @@ static void connect_action(void) {
         current_color.g = (uint8_t)g_val;
         current_color.b = (uint8_t)b_val;
 
+        SSD1306_Fill(SSD1306_COLOR_BLACK);
         SSD1306_UpdateScreen();
-        SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
-        SSD1306_GotoXY(3, 22);
-        SSD1306_Puts("Color Sync!", &Font_6x10, SSD1306_COLOR_WHITE);
+        // SSD1306_DrawFilledRectangle(0, 22, SSD1306_WIDTH, 10, SSD1306_COLOR_BLACK);
+        SSD1306_GotoXY(19, 0);
+        SSD1306_Puts("Las rutas estan", &Font_6x10, SSD1306_COLOR_WHITE);
+        SSD1306_GotoXY(43, 10);
+        SSD1306_Puts("unidas,", &Font_6x10, SSD1306_COLOR_WHITE);
+        SSD1306_GotoXY(28, 20);
+        SSD1306_Puts("cuantos mas?", &Font_6x10, SSD1306_COLOR_WHITE);
         SSD1306_UpdateScreen();
       }
 
