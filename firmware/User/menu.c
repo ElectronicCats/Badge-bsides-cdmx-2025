@@ -56,31 +56,36 @@ typedef enum {
 
 typedef struct {
   AnimationMode mode;
-  uint8_t solid_color; // 0=Red, 1=Green, 2=Blue
+  uint8_t solid_color;  // 0=Red, 1=Green, 2=Blue
 } AnimationState;
 
 static AnimationState anim_state = {
-  .mode = ANIM_MODE_RAINBOW,
-  .solid_color = 0,
+    .mode = ANIM_MODE_RAINBOW,
+    .solid_color = 0,
 };
 
 typedef struct {
   uint8_t r, g, b;
 } RGBColor;
 
-static volatile RGBColor current_color = {0, 0x60, 0xC0};
+#define DEFAULT_COLOR {0, 0x60, 0xC0}
+
+static volatile RGBColor current_color = DEFAULT_COLOR;
 
 static void animation_run() {
   static uint16_t flag_tick_counter = 0;
-  static uint8_t flag_phase = 0; // 0: green, 1: white, 2: red
+  static uint8_t flag_phase = 0;  // 0: green, 1: white, 2: red
   const uint16_t flag_update_ticks = 50;
 
   switch (anim_state.mode) {
     case ANIM_MODE_SOLID: {
       uint8_t r = 0, g = 0, b = 0;
-      if (anim_state.solid_color == 0) r = 0xFF;
-      else if (anim_state.solid_color == 1) g = 0xFF;
-      else b = 0xFF;
+      if (anim_state.solid_color == 0)
+        r = 0xFF;
+      else if (anim_state.solid_color == 1)
+        g = 0xFF;
+      else
+        b = 0xFF;
       current_color.r = r;
       current_color.g = g;
       current_color.b = b;
@@ -97,19 +102,19 @@ static void animation_run() {
         flag_tick_counter = 0;
       }
       switch (flag_phase) {
-        case 0: // Green
+        case 0:  // Green
           current_color.r = 0;
           current_color.g = 0xFF;
           current_color.b = 0;
           ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
           break;
-        case 1: // White
+        case 1:  // White
           current_color.r = 0xFF;
           current_color.g = 0xFF;
           current_color.b = 0xFF;
           ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
           break;
-        case 2: // Red
+        case 2:  // Red
           current_color.r = 0xFF;
           current_color.g = 0;
           current_color.b = 0;
@@ -125,18 +130,72 @@ static void animation_run() {
 }
 
 static const char* anim_mode_names[] = {
-  "Color",
-  "Arcoiris",
-  "Bandera"
-};
+    "Color",
+    "Arcoiris",
+    "Bandera"};
 
 static const char* color_names[] = {
-  "Rojo",
-  "Verde",
-  "Azul"
-};
+    "Rojo",
+    "Verde",
+    "Azul"};
 
 #define ANIM_MODE_VISIBLE_ITEMS 2
+
+static void select_solid_color_action(void) {
+  anim_state.mode = ANIM_MODE_SOLID;
+  int8_t color_idx = anim_state.solid_color;
+  uint8_t color_render = 1;
+  while (1) {
+    animation_run();
+    if (is_btn_up_pressed()) {
+      color_idx = (color_idx + 2) % 3;
+      color_render = 1;
+    } else if (is_btn_down_pressed()) {
+      color_idx = (color_idx + 1) % 3;
+      color_render = 1;
+    } else if (is_btn_enter_pressed()) {
+      anim_state.solid_color = color_idx;
+      break;
+    } else if (is_btn_back_pressed()) {
+      break;
+    }
+    if (color_render) {
+      SSD1306_Fill(SSD1306_COLOR_BLACK);
+      SSD1306_UpdateScreen();
+      SSD1306_GotoXY(10, 8);
+      SSD1306_Puts("Select Color", &Font_6x10, SSD1306_COLOR_WHITE);
+      SSD1306_GotoXY(30, 20);
+      SSD1306_Puts((char*)color_names[color_idx], &Font_6x10, SSD1306_COLOR_WHITE);
+      SSD1306_UpdateScreen();
+      color_render = 0;
+    }
+    LL_mDelay(20);
+  }
+}
+
+static void set_anim_rainbow_action(void) {
+  current_color.r = 0;
+  current_color.g = 0x60;
+  current_color.b = 0xC0;
+  anim_state.mode = ANIM_MODE_RAINBOW;
+}
+
+static void set_anim_flag_action(void) {
+  anim_state.mode = ANIM_MODE_MEXICAN_FLAG;
+}
+
+// Menu item definition
+typedef struct {
+  const char* name;
+  void (*action)(void);
+} MenuItem_t;
+
+static const MenuItem_t animMenuItems[] = {
+    {"Color", select_solid_color_action},
+    {"Arcoiris", set_anim_rainbow_action},
+    {"Bandera", set_anim_flag_action},
+};
+#define ANIM_MENU_ITEM_COUNT (sizeof(animMenuItems) / sizeof(MenuItem_t))
 
 static void anim_mode_menu_action(void) {
   int8_t anim_selected_index = anim_state.mode;
@@ -171,37 +230,9 @@ static void anim_mode_menu_action(void) {
       }
       needs_render = 1;
     } else if (is_btn_enter_pressed()) {
-      anim_state.mode = (AnimationMode)anim_selected_index;
-      // Only prompt for color selection if SOLID
-      if (anim_state.mode == ANIM_MODE_SOLID) {
-        int8_t color_idx = anim_state.solid_color;
-        uint8_t color_render = 1;
-        while (1) {
-          animation_run();
-          if (is_btn_up_pressed()) {
-            color_idx = (color_idx + 2) % 3;
-            color_render = 1;
-          } else if (is_btn_down_pressed()) {
-            color_idx = (color_idx + 1) % 3;
-            color_render = 1;
-          } else if (is_btn_enter_pressed()) {
-            anim_state.solid_color = color_idx;
-            break;
-          } else if (is_btn_back_pressed()) {
-            break;
-          }
-          if (color_render) {
-            SSD1306_Fill(SSD1306_COLOR_BLACK);
-            SSD1306_UpdateScreen();
-            SSD1306_GotoXY(10, 8);
-            SSD1306_Puts("Select Color", &Font_6x10, SSD1306_COLOR_WHITE);
-            SSD1306_GotoXY(30, 20);
-            SSD1306_Puts((char*)color_names[color_idx], &Font_6x10, SSD1306_COLOR_WHITE);
-            SSD1306_UpdateScreen();
-            color_render = 0;
-          }
-          LL_mDelay(80);
-        }
+      // Execute the action associated with the selected animation
+      if (animMenuItems[anim_selected_index].action) {
+        animMenuItems[anim_selected_index].action();
       }
       break;
     } else if (is_btn_back_pressed()) {
@@ -222,9 +253,9 @@ static void anim_mode_menu_action(void) {
         SSD1306_GotoXY(10, y_pos);
         if (item_index == anim_selected_index) {
           SSD1306_DrawFilledRectangle(0, y_pos - 1, SSD1306_WIDTH, 10, SSD1306_COLOR_WHITE);
-          SSD1306_Puts((char*)anim_mode_names[item_index], &Font_6x10, SSD1306_COLOR_BLACK);
+          SSD1306_Puts((char*)animMenuItems[item_index].name, &Font_6x10, SSD1306_COLOR_BLACK);
         } else {
-          SSD1306_Puts((char*)anim_mode_names[item_index], &Font_6x10, SSD1306_COLOR_WHITE);
+          SSD1306_Puts((char*)animMenuItems[item_index].name, &Font_6x10, SSD1306_COLOR_WHITE);
         }
       }
       SSD1306_UpdateScreen();
@@ -233,12 +264,6 @@ static void anim_mode_menu_action(void) {
     LL_mDelay(20);
   }
 }
-
-// Menu item definition
-typedef struct {
-  const char* name;
-  void (*action)(void);
-} MenuItem_t;
 
 // Menu definitions
 static const MenuItem_t mainMenuItems[] = {
