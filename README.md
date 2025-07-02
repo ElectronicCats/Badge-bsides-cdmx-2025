@@ -1,16 +1,16 @@
-# Unknown Security Conference Badge
+# Security BSides CDMX 2025 Badge
 
 ## Technology
 
-- CH32V003
-- LEDs
+- Puya PY32F030F28U6TR
+- Neopixels
 - Display OLED
 - 2x AAA Battery Holder
 - Shitty Addon Connector
 
 ## Getting Started
 
-Your badge comes with a pre-installed firmware, but in case you need to reprogram it, you can use the firmware.hex from the release section.
+Your badge comes with a pre-installed firmware, but in case you need to reprogram it, you can use the binaries from the release section.
 
 If you want to build your own firmware, check out the [README](firmware/README.md) in the firmware folder.
 
