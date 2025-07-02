@@ -65,9 +65,6 @@ int main(void) {
   
   while (1) {
     Menu_UpdateAndRender();
-    i = (i + 1) % WS2812_NUM_LEDS;
-    ws2812_pixel(i, r++, g++, b++);
-    LL_mDelay(10);
   }
 }
 

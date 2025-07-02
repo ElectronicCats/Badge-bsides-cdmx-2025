@@ -537,6 +537,9 @@ static void Menu_Render(void) {
 }
 
 void Menu_UpdateAndRender(void) {
+  animation_run();
+  LL_mDelay(20);
+
   if (is_btn_up_pressed()) {
     printf("Button UP pressed\r\n");
     selected_index--;
