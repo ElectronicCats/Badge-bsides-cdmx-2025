@@ -81,7 +81,10 @@ static void animation_run() {
       if (anim_state.solid_color == 0) r = 0xFF;
       else if (anim_state.solid_color == 1) g = 0xFF;
       else b = 0xFF;
-      ws2812_pixel_all(r, g, b);
+      current_color.r = r;
+      current_color.g = g;
+      current_color.b = b;
+      ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
       break;
     }
     case ANIM_MODE_RAINBOW:
@@ -95,13 +98,22 @@ static void animation_run() {
       }
       switch (flag_phase) {
         case 0: // Green
-          ws2812_pixel_all(0, 0xFF, 0);
+          current_color.r = 0;
+          current_color.g = 0xFF;
+          current_color.b = 0;
+          ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
           break;
         case 1: // White
-          ws2812_pixel_all(0xFF, 0xFF, 0xFF);
+          current_color.r = 0xFF;
+          current_color.g = 0xFF;
+          current_color.b = 0xFF;
+          ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
           break;
         case 2: // Red
-          ws2812_pixel_all(0xFF, 0, 0);
+          current_color.r = 0xFF;
+          current_color.g = 0;
+          current_color.b = 0;
+          ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
           break;
       }
       break;
@@ -361,7 +373,7 @@ static void settings_action(void) {
   uint8_t settings_needs_render = 1;
 
   while (1) {
-    animation_run();(current_color.r++, current_color.g++, current_color.b++);
+    animation_run();
 
     if (is_btn_up_pressed()) {
       settings_selected_index--;
@@ -634,7 +646,7 @@ static void connect_action(void) {
 
   while (1) {
     if (!syncronized) {
-      animation_run();(current_color.r++, current_color.g++, current_color.b++);
+      animation_run();
     } else {
       ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
     }
@@ -689,7 +701,7 @@ static void credits_action(void) {
   uint8_t needs_render = 1;
 
   while (1) {
-    animation_run();(current_color.r++, current_color.g++, current_color.b++);
+    animation_run();
 
     if (is_btn_up_pressed()) {
       if (scroll_offset > 0) {
