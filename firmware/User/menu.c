@@ -456,6 +456,8 @@ static void leds_brightness_action(void) {
   percent = (percent / 10) * 10;
 
   while (1) {
+    animation_run();
+
     if (is_btn_up_pressed()) {
       if (percent < 100) {
         percent += 10;
@@ -488,7 +490,7 @@ static void leds_brightness_action(void) {
 
       needs_render = 0;
     }
-    LL_mDelay(100);
+    LL_mDelay(20);
   }
 }
 
