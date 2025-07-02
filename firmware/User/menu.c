@@ -47,11 +47,194 @@ static void credits_action();
 static void settings_action();
 static void leds_brightness_action();
 
+typedef enum {
+  ANIM_MODE_SOLID,
+  ANIM_MODE_RAINBOW,
+  ANIM_MODE_BREATHING,
+  ANIM_MODE_COUNT
+} AnimationMode;
+
+typedef struct {
+  AnimationMode mode;
+  uint8_t solid_color; // 0=Red, 1=Green, 2=Blue
+  uint8_t breathing_color; // 0=Red, 1=Green, 2=Blue
+  uint8_t breathing_phase; // 0-255
+  int8_t breathing_dir;    // +1 or -1
+} AnimationState;
+
+static AnimationState anim_state = {
+  .mode = ANIM_MODE_RAINBOW,
+  .solid_color = 0,
+  .breathing_color = 0,
+  .breathing_phase = 0,
+  .breathing_dir = 1,
+};
+
 typedef struct {
   uint8_t r, g, b;
 } RGBColor;
 
 static volatile RGBColor current_color = {0, 0x60, 0xC0};
+
+static void animation_run() {
+  switch (anim_state.mode) {
+    case ANIM_MODE_SOLID: {
+      uint8_t r = 0, g = 0, b = 0;
+      if (anim_state.solid_color == 0) r = 0xFF;
+      else if (anim_state.solid_color == 1) g = 0xFF;
+      else b = 0xFF;
+      ws2812_pixel_all(r, g, b);
+      break;
+    }
+    case ANIM_MODE_RAINBOW:
+      ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
+      break;
+    case ANIM_MODE_BREATHING: {
+      // Breathing parameters
+      const uint8_t min_brightness = 10;
+      const uint8_t max_brightness = 100;
+      const uint8_t step = 2; // Breathing speed (higher is faster)
+      uint8_t value = min_brightness + ((max_brightness - min_brightness) * anim_state.breathing_phase) / 255;
+      uint8_t r = 0, g = 0, b = 0;
+      if (anim_state.breathing_color == 0) r = value;
+      else if (anim_state.breathing_color == 1) g = value;
+      else b = value;
+      ws2812_pixel_all(r, g, b);
+
+      // Update phase
+      if (anim_state.breathing_dir > 0) {
+        if (anim_state.breathing_phase + step >= 255) {
+          anim_state.breathing_phase = 255;
+          anim_state.breathing_dir = -1;
+        } else {
+          anim_state.breathing_phase += step;
+        }
+      } else {
+        if (anim_state.breathing_phase <= step) {
+          anim_state.breathing_phase = 0;
+          anim_state.breathing_dir = 1;
+        } else {
+          anim_state.breathing_phase -= step;
+        }
+      }
+      break;
+    }
+    default:
+      ws2812_pixel_all(0, 0, 0);
+      break;
+  }
+}
+
+static const char* anim_mode_names[] = {
+  "Solid Color",
+  "Rainbow",
+  "Breathing"
+};
+
+static const char* color_names[] = {
+  "Red",
+  "Green",
+  "Blue"
+};
+
+#define ANIM_MODE_VISIBLE_ITEMS 2
+
+static void anim_mode_menu_action(void) {
+  int8_t anim_selected_index = anim_state.mode;
+  int8_t anim_menu_offset = 0;
+  uint8_t needs_render = 1;
+
+  while (1) {
+    animation_run();
+
+    if (is_btn_up_pressed()) {
+      anim_selected_index--;
+      if (anim_selected_index < 0) {
+        anim_selected_index = ANIM_MODE_COUNT - 1;
+      }
+      // Update offset if selection is out of view
+      if (anim_selected_index < anim_menu_offset) {
+        anim_menu_offset = anim_selected_index;
+      } else if (anim_selected_index == ANIM_MODE_COUNT - 1) {
+        anim_menu_offset = ANIM_MODE_COUNT > ANIM_MODE_VISIBLE_ITEMS ? ANIM_MODE_COUNT - ANIM_MODE_VISIBLE_ITEMS : 0;
+      }
+      needs_render = 1;
+    } else if (is_btn_down_pressed()) {
+      anim_selected_index++;
+      if (anim_selected_index >= ANIM_MODE_COUNT) {
+        anim_selected_index = 0;
+      }
+      // Update offset if selection is out of view
+      if (anim_selected_index >= anim_menu_offset + ANIM_MODE_VISIBLE_ITEMS) {
+        anim_menu_offset = anim_selected_index - ANIM_MODE_VISIBLE_ITEMS + 1;
+      } else if (anim_selected_index == 0) {
+        anim_menu_offset = 0;
+      }
+      needs_render = 1;
+    } else if (is_btn_enter_pressed()) {
+      anim_state.mode = (AnimationMode)anim_selected_index;
+      // If solid or breathing, prompt for color selection
+      if (anim_state.mode == ANIM_MODE_SOLID || anim_state.mode == ANIM_MODE_BREATHING) {
+        int8_t color_idx = (anim_state.mode == ANIM_MODE_SOLID) ? anim_state.solid_color : anim_state.breathing_color;
+        uint8_t color_render = 1;
+        while (1) {
+          animation_run();
+          if (is_btn_up_pressed()) {
+            color_idx = (color_idx + 2) % 3;
+            color_render = 1;
+          } else if (is_btn_down_pressed()) {
+            color_idx = (color_idx + 1) % 3;
+            color_render = 1;
+          } else if (is_btn_enter_pressed()) {
+            if (anim_state.mode == ANIM_MODE_SOLID) anim_state.solid_color = color_idx;
+            else anim_state.breathing_color = color_idx;
+            break;
+          } else if (is_btn_back_pressed()) {
+            break;
+          }
+          if (color_render) {
+            SSD1306_Fill(SSD1306_COLOR_BLACK);
+            SSD1306_UpdateScreen();
+            SSD1306_GotoXY(10, 8);
+            SSD1306_Puts("Select Color", &Font_6x10, SSD1306_COLOR_WHITE);
+            SSD1306_GotoXY(30, 20);
+            SSD1306_Puts((char*)color_names[color_idx], &Font_6x10, SSD1306_COLOR_WHITE);
+            SSD1306_UpdateScreen();
+            color_render = 0;
+          }
+          LL_mDelay(80);
+        }
+      }
+      break;
+    } else if (is_btn_back_pressed()) {
+      break;
+    }
+
+    if (needs_render) {
+      SSD1306_Fill(SSD1306_COLOR_BLACK);
+      SSD1306_UpdateScreen();
+      SSD1306_GotoXY(10, 0);
+      SSD1306_Puts("Animation Mode", &Font_6x10, SSD1306_COLOR_WHITE);
+      for (uint8_t i = 0; i < ANIM_MODE_VISIBLE_ITEMS; i++) {
+        uint8_t item_index = anim_menu_offset + i;
+        if (item_index >= ANIM_MODE_COUNT) {
+          break;
+        }
+        uint8_t y_pos = 12 + i * 10;
+        SSD1306_GotoXY(10, y_pos);
+        if (item_index == anim_selected_index) {
+          SSD1306_DrawFilledRectangle(0, y_pos - 1, SSD1306_WIDTH, 10, SSD1306_COLOR_WHITE);
+          SSD1306_Puts((char*)anim_mode_names[item_index], &Font_6x10, SSD1306_COLOR_BLACK);
+        } else {
+          SSD1306_Puts((char*)anim_mode_names[item_index], &Font_6x10, SSD1306_COLOR_WHITE);
+        }
+      }
+      SSD1306_UpdateScreen();
+      needs_render = 0;
+    }
+    LL_mDelay(20);
+  }
+}
 
 // Menu item definition
 typedef struct {
@@ -109,6 +292,7 @@ static const MenuItem_t ledsMenuItems[] = {
     {"Encender", leds_on_action},
     {"Apagar", leds_off_action},
     {"Brillo", leds_brightness_action},
+    {"Animacion", anim_mode_menu_action},
 };
 #define LEDS_MENU_ITEM_COUNT (sizeof(ledsMenuItems) / sizeof(MenuItem_t))
 
@@ -118,7 +302,7 @@ static void leds_submenu_action(void) {
   uint8_t leds_needs_render = 1;
 
   while (1) {
-    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
+    animation_run();
 
     if (is_btn_up_pressed()) {
       leds_selected_index--;
@@ -191,7 +375,7 @@ static void settings_action(void) {
   uint8_t settings_needs_render = 1;
 
   while (1) {
-    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
+    animation_run();(current_color.r++, current_color.g++, current_color.b++);
 
     if (is_btn_up_pressed()) {
       settings_selected_index--;
@@ -464,7 +648,7 @@ static void connect_action(void) {
 
   while (1) {
     if (!syncronized) {
-      ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
+      animation_run();(current_color.r++, current_color.g++, current_color.b++);
     } else {
       ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
     }
@@ -519,7 +703,7 @@ static void credits_action(void) {
   uint8_t needs_render = 1;
 
   while (1) {
-    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
+    animation_run();(current_color.r++, current_color.g++, current_color.b++);
 
     if (is_btn_up_pressed()) {
       if (scroll_offset > 0) {
