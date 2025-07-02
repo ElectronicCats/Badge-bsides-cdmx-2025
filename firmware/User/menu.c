@@ -77,8 +77,10 @@ static uint8_t needs_render = 1;
 
 uint8_t i = 0, r = 0, g = 0x60, b = 0xC0;
 
+uint8_t prev_brightness = DEFAULT_BRIGHTNESS;
+
 static void leds_on_action(void) {
-  ws2812_set_brightness(DEFAULT_BRIGHTNESS);
+  ws2812_set_brightness(prev_brightness);
 
   SSD1306_Fill(SSD1306_COLOR_BLACK);
   SSD1306_UpdateScreen();
@@ -90,6 +92,8 @@ static void leds_on_action(void) {
 }
 
 static void leds_off_action(void) {
+  extern uint8_t _brightness;
+  prev_brightness = _brightness;
   ws2812_set_brightness(0);
 
   SSD1306_Fill(SSD1306_COLOR_BLACK);
@@ -114,8 +118,7 @@ static void leds_submenu_action(void) {
   uint8_t leds_needs_render = 1;
 
   while (1) {
-    i = (i + 1) % WS2812_NUM_LEDS;
-    ws2812_pixel(i, r++, g++, b++);
+    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
 
     if (is_btn_up_pressed()) {
       leds_selected_index--;
@@ -188,8 +191,7 @@ static void settings_action(void) {
   uint8_t settings_needs_render = 1;
 
   while (1) {
-    i = (i + 1) % WS2812_NUM_LEDS;
-    ws2812_pixel(i, r++, g++, b++);
+    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
 
     if (is_btn_up_pressed()) {
       settings_selected_index--;
@@ -461,12 +463,10 @@ static void connect_action(void) {
   bool syncronized = false;
 
   while (1) {
-    // Animate local LEDs with the current (potentially synchronized) color
-    i = (i + 1) % WS2812_NUM_LEDS;
     if (!syncronized) {
-      ws2812_pixel(i, current_color.r++, current_color.g++, current_color.b++);
+      ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
     } else {
-      ws2812_pixel(i, current_color.r, current_color.g, current_color.b);
+      ws2812_pixel_all(current_color.r, current_color.g, current_color.b);
     }
 
     if (is_btn_back_pressed()) {
@@ -519,8 +519,7 @@ static void credits_action(void) {
   uint8_t needs_render = 1;
 
   while (1) {
-    i = (i + 1) % WS2812_NUM_LEDS;
-    ws2812_pixel(i, r++, g++, b++);
+    ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
 
     if (is_btn_up_pressed()) {
       if (scroll_offset > 0) {
