@@ -50,24 +50,18 @@ static void leds_brightness_action();
 typedef enum {
   ANIM_MODE_SOLID,
   ANIM_MODE_RAINBOW,
-  ANIM_MODE_BREATHING,
+  ANIM_MODE_MEXICAN_FLAG,
   ANIM_MODE_COUNT
 } AnimationMode;
 
 typedef struct {
   AnimationMode mode;
   uint8_t solid_color; // 0=Red, 1=Green, 2=Blue
-  uint8_t breathing_color; // 0=Red, 1=Green, 2=Blue
-  uint8_t breathing_phase; // 0-255
-  int8_t breathing_dir;    // +1 or -1
 } AnimationState;
 
 static AnimationState anim_state = {
   .mode = ANIM_MODE_RAINBOW,
   .solid_color = 0,
-  .breathing_color = 0,
-  .breathing_phase = 0,
-  .breathing_dir = 1,
 };
 
 typedef struct {
@@ -77,6 +71,10 @@ typedef struct {
 static volatile RGBColor current_color = {0, 0x60, 0xC0};
 
 static void animation_run() {
+  static uint16_t flag_tick_counter = 0;
+  static uint8_t flag_phase = 0; // 0: green, 1: white, 2: red
+  const uint16_t flag_update_ticks = 50;
+
   switch (anim_state.mode) {
     case ANIM_MODE_SOLID: {
       uint8_t r = 0, g = 0, b = 0;
@@ -89,33 +87,22 @@ static void animation_run() {
     case ANIM_MODE_RAINBOW:
       ws2812_pixel_all(current_color.r++, current_color.g++, current_color.b++);
       break;
-    case ANIM_MODE_BREATHING: {
-      // Breathing parameters
-      const uint8_t min_brightness = 10;
-      const uint8_t max_brightness = 100;
-      const uint8_t step = 2; // Breathing speed (higher is faster)
-      uint8_t value = min_brightness + ((max_brightness - min_brightness) * anim_state.breathing_phase) / 255;
-      uint8_t r = 0, g = 0, b = 0;
-      if (anim_state.breathing_color == 0) r = value;
-      else if (anim_state.breathing_color == 1) g = value;
-      else b = value;
-      ws2812_pixel_all(r, g, b);
-
-      // Update phase
-      if (anim_state.breathing_dir > 0) {
-        if (anim_state.breathing_phase + step >= 255) {
-          anim_state.breathing_phase = 255;
-          anim_state.breathing_dir = -1;
-        } else {
-          anim_state.breathing_phase += step;
-        }
-      } else {
-        if (anim_state.breathing_phase <= step) {
-          anim_state.breathing_phase = 0;
-          anim_state.breathing_dir = 1;
-        } else {
-          anim_state.breathing_phase -= step;
-        }
+    case ANIM_MODE_MEXICAN_FLAG: {
+      flag_tick_counter++;
+      if (flag_tick_counter >= flag_update_ticks) {
+        flag_phase = (flag_phase + 1) % 3;
+        flag_tick_counter = 0;
+      }
+      switch (flag_phase) {
+        case 0: // Green
+          ws2812_pixel_all(0, 0xFF, 0);
+          break;
+        case 1: // White
+          ws2812_pixel_all(0xFF, 0xFF, 0xFF);
+          break;
+        case 2: // Red
+          ws2812_pixel_all(0xFF, 0, 0);
+          break;
       }
       break;
     }
@@ -126,15 +113,15 @@ static void animation_run() {
 }
 
 static const char* anim_mode_names[] = {
-  "Solid Color",
-  "Rainbow",
-  "Breathing"
+  "Color",
+  "Arcoiris",
+  "Bandera"
 };
 
 static const char* color_names[] = {
-  "Red",
-  "Green",
-  "Blue"
+  "Rojo",
+  "Verde",
+  "Azul"
 };
 
 #define ANIM_MODE_VISIBLE_ITEMS 2
@@ -173,9 +160,9 @@ static void anim_mode_menu_action(void) {
       needs_render = 1;
     } else if (is_btn_enter_pressed()) {
       anim_state.mode = (AnimationMode)anim_selected_index;
-      // If solid or breathing, prompt for color selection
-      if (anim_state.mode == ANIM_MODE_SOLID || anim_state.mode == ANIM_MODE_BREATHING) {
-        int8_t color_idx = (anim_state.mode == ANIM_MODE_SOLID) ? anim_state.solid_color : anim_state.breathing_color;
+      // Only prompt for color selection if SOLID
+      if (anim_state.mode == ANIM_MODE_SOLID) {
+        int8_t color_idx = anim_state.solid_color;
         uint8_t color_render = 1;
         while (1) {
           animation_run();
@@ -186,8 +173,7 @@ static void anim_mode_menu_action(void) {
             color_idx = (color_idx + 1) % 3;
             color_render = 1;
           } else if (is_btn_enter_pressed()) {
-            if (anim_state.mode == ANIM_MODE_SOLID) anim_state.solid_color = color_idx;
-            else anim_state.breathing_color = color_idx;
+            anim_state.solid_color = color_idx;
             break;
           } else if (is_btn_back_pressed()) {
             break;
